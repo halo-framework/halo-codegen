@@ -1,0 +1,71 @@
+{
+    "service": "halocurrentaccount",
+    "frameworkVersion": ">=1.1.0 <2.0.0",
+    "provider": {
+        "name": "aws",
+        "stage": "yor-dev",
+        "region": "us-east-1",
+        "profile": "default"
+    },
+    "plugins": [
+        "serverless-fargate-plugin"
+    ],
+    "custom": {
+        "fargate": [
+            {
+                "clusterName": "halocurrentaccount-clust",
+                "vpc": {
+                    "cidr": "10.0.0.0/16",
+                    "subnets": [
+                        "10.0.0.0/24",
+                        "10.0.1.0/24"
+                    ]
+                },
+                "tags": {
+                    "group": "bian_service_domains",
+                    "service": "halo_current_account"
+                },
+                "public": "true",
+                "services": [
+                    {
+                        "name": "halocurrentaccount-service",
+                        "cpu": 512,
+                        "memory": 1024,
+                        "port": 80,
+                        "environment": {
+                            "HALO_STAGE": "yor-dev",
+                            "HALO_TYPE": "dev",
+                            "HALO_FUNC_NAME": "halo_current_account",
+                            "HALO_APP_NAME": "bian_service_domains"
+                        },
+                        "taskRoleArn": "ecsTaskExecutionRole",
+                        "healthCheckUri": "/yor-dev/health",
+                        "healthCheckInterval": 6,
+                        "imageTag": "latest",
+                        "imageRepository": "xxx.amazonaws.com/halo_service_domain",
+                        "autoScale": {
+                            "min": 1,
+                            "max": 10,
+                            "cooldownIn": 30,
+                            "cooldownOut": 60,
+                            "metric": "ECSServiceAverageCPUUtilization",
+                            "targetValue": 75
+                        },
+                        "entryPoint": [],
+                        "protocols": [
+                            {
+                                "protocol": "HTTP"
+                            },
+                            {
+                                "protocol": "HTTPS",
+                                "certificateArns": [
+                                    "xxxx"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
