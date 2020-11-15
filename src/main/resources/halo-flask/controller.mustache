@@ -121,9 +121,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     ref = {{classname}}Impl_{{operationId}}()
 
-    http_method = HTTPChoice.{{#lambda.lowercase}}{{httpMethod}}{{/lambda.lowercase}}
-
-    ret = ref.do_process(http_method, request_vars)
+    ret = ref.do_process(request_vars)
 
     return ret.payload, ret.code, ret.headers
 

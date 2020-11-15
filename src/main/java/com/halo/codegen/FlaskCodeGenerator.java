@@ -14,6 +14,8 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
   protected String apiVersion = "1.0.0";
 
   private String envDir = "env";
+  private String envApiDir = "api";
+  private String envConfigDir = "config";
   // cloud addition
   private String dockerDir = "docker";
   private String serverlessDir = "serverless";
@@ -94,9 +96,11 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("travis.mustache", "", ".travis.yml"));
     this.supportingFiles.add(new SupportingFile("encoder.mustache", this.packagePath(), "encoder.py"));
     this.supportingFiles.add(new SupportingFile("__init__test.mustache", this.packagePath() + File.separatorChar + this.testPackage, "__init__.py"));
-    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.packagePath(), "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__app.mustache", this.packagePath(), "__init__.py"));
     // added
     this.supportingFiles.add(new SupportingFile(".env.loc.mustache", this.envDir , ".env.loc"));
+    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("startup_props.mustache", this.envDir + File.separatorChar + this.envConfigDir, "startup_props.json"));
 
     this.supportingFiles.add(new SupportingFile("__init__config.mustache", this.packagePath() + File.separatorChar + this.configPackage, "__init__.py"));
 

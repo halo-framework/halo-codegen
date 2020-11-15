@@ -48,7 +48,8 @@ def info_from_{{name}}(api_key, required_scopes):
     :rtype: dict | None
     """
     from flask import current_app as flask_app
-    if "api_keys" in flask_app.config and api_key in flask_app.config["api_keys"]:
+    API_KEYS = "API_KEYS"
+    if API_KEYS in flask_app.config and api_key in flask_app.config[API_KEYS]:
         return {'uid': 'user_id'}
     return None
 
