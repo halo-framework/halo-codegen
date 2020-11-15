@@ -121,7 +121,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     ref = {{classname}}Impl_{{operationId}}()
 
-    ret = ref.do_process(request_vars)
+    ret = ref.do_process("{{operationId}}",request_vars)
 
     return ret.payload, ret.code, ret.headers
 
