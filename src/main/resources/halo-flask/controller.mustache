@@ -119,11 +119,11 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     {{/allParams}}
 
-    ref = {{classname}}Impl_{{operationId}}()
+    impl = {{classname}}Impl_{{operationId}}()
 
-    ret = ref.do_process("{{operationId}}",request_vars)
+    halo_response = impl.do_process("{{operationId}}",request_vars)
 
-    return ret.payload, ret.code, ret.headers
+    return halo_response.payload, halo_response.code, halo_response.headers
 
 {{/operation}}
 {{/operations}}
