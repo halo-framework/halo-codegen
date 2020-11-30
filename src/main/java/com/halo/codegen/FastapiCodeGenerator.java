@@ -79,7 +79,7 @@ public class FastapiCodeGenerator extends AbstractPythonConnexionServerCodegen i
      * will use the resource stream to attempt to read the templates.
      */
     // added
-    this.apiTemplateFiles.put("impl.mustache", "_impl.py");
+    this.apiTemplateFiles.put("service.mustache", "_service.py");
 
   }
 

@@ -39,7 +39,7 @@ from halo_bian.bian.bian import ActionTerms
 {{#operation}}
 
 
-class {{classname}}Impl_{{operationId}}(AbsBianMixin,AbsBaseLinkX):
+class {{classname}}Service_{{operationId}}(AbsBianMixin,AbsBaseLinkX):
     bian_action = ActionTerms.{{#lambda.uppercase}}{{tags.0.name}}{{/lambda.uppercase}}
 
 
