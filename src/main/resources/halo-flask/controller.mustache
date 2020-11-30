@@ -119,9 +119,9 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     {{/allParams}}
 
-    impl = {{classname}}Impl_{{operationId}}()
+    service = {{classname}}Service_{{operationId}}()
 
-    halo_response = impl.do_process("{{operationId}}",request_vars)
+    halo_response = service.do_process("{{operationId}}",request_vars)
 
     return halo_response.payload, halo_response.code, halo_response.headers
 
