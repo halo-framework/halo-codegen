@@ -140,3 +140,34 @@ def _deserialize_dict(data, boxed_type):
     """
     return {k: _deserialize(v, boxed_type)
             for k, v in six.iteritems(data)}
+
+def get_flask_filters(collection_filter,trace_id):
+    from halo_app.context import HaloContext
+    import json
+    from flask_filter.schemas import FilterSchema
+    filter_schema = FilterSchema()
+    try:
+        collection_filter_json = json.loads(collection_filter)
+        if "field" in collection_filter_json:
+            many = False
+        else:
+            many = True
+        filters = filter_schema.load(collection_filter_json, many=many)
+        if not many:
+            filters = [filters]
+        return get_app_filters(filters)
+    except Exception as e: #{'_schema': ['Invalid input type.']}
+        error_code = 400
+        payload = {"error":{"error_code": error_code, "error_message": e.__str__(), "error_detail": collection_filter_json,
+            "data": "",
+            "trace_id": trace_id}
+        }
+        return payload,error_code
+
+def get_app_filters(collection_filters):
+    from halo_app.filters import Filter
+    arr = []
+    for f in collection_filters:
+        filter = Filter(f.field,f.OP,f.value)
+        arr.append(filter)
+    return arr

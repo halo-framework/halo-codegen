@@ -119,11 +119,17 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     {{/allParams}}
 
+    if 'collection_filter' in request_vars:
+        from ..util import get_flask_filters
+        from halo_app.context import HaloContext
+        app_filters = get_flask_filters(request_vars['collection_filter'],request.headers.get(HaloContext.CORRELATION))
+        request_vars['collection_filter'] = app_filters
+
     service = {{classname}}Service_{{operationId}}()
 
-    halo_response = service.do_process("{{operationId}}",request_vars)
+    bian_response = service.do_process("{{operationId}}",request_vars)
 
-    return halo_response.payload, halo_response.code, halo_response.headers
+    return bian_response.payload, bian_response.code, bian_response.headers
 
 {{/operation}}
 {{/operations}}
