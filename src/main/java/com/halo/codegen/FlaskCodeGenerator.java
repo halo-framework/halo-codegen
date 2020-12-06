@@ -110,6 +110,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_api.py"));
     this.supportingFiles.add(new SupportingFile("mixin_handler.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_handler.py"));
     this.supportingFiles.add(new SupportingFile("__init__logic.mustache", this.packagePath() + File.separatorChar + this.mixinPackage + File.separatorChar + this.logicPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("utilx.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "utilx.py"));
 
     this.supportingFiles.add(new SupportingFile("aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));
     this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", this.dockerDir, "Dockerfile"));
