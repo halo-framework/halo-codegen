@@ -10,7 +10,7 @@ from {{packageName}} import util
 {{#operations}}
 {{#operation}}
 
-from .{{classFilename}}_service import {{classname}}Service_{{operationId}}
+from ..services.{{classFilename}}_service import {{classname}}Service_{{operationId}}
 
 def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}):  # noqa: E501
     """{{#summary}}{{.}}{{/summary}}{{^summary}}{{operationId}}{{/summary}}
