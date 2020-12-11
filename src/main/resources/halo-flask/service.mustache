@@ -11,7 +11,7 @@ import connexion
 {{/imports}}
 from {{packageName}} import util
 {{#operations}}
-from halo_app.app.viewsx import AbsBaseLinkX
+from halo_app.app.viewsx import AbsService
 from halo_bian.bian.abs_bian_srv import AbsBianMixin
 from halo_bian.bian.bian import ActionTerms
 
@@ -39,7 +39,7 @@ from halo_bian.bian.bian import ActionTerms
 {{#operation}}
 
 
-class {{classname}}Service_{{operationId}}(AbsBianMixin,AbsBaseLinkX):
+class {{classname}}Service_{{operationId}}(AbsBianMixin,AbsService):
     bian_action = ActionTerms.{{#lambda.uppercase}}{{tags.0.name}}{{/lambda.uppercase}}
 
 

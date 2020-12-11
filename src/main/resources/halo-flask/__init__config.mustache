@@ -402,8 +402,11 @@ class Config(object):
     except FileNotFoundError as e:
         pass
 
+    FACTORY_CLASS_LIST = {"retrieve_current_account_behavior_qualifier_reference_ids":"tester.services.retrieve_service.RetrieveControllerService_retrieve_current_account_behavior_qualifier_reference_ids"}
 
-    print('== The base settings file has been loaded.')
+
+
+print('== The base settings file has been loaded.')
 
 
 class Config_loc(Config):
