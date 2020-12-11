@@ -102,7 +102,7 @@ public class FastapiCodeGenerator extends AbstractPythonConnexionServerCodegen i
     this.supportingFiles.add(new SupportingFile("mixin_hooks.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_hooks.py"));
     this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_api.py"));
     this.supportingFiles.add(new SupportingFile("mixin_handler.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_handler.py"));
-    this.supportingFiles.add(new SupportingFile("__init__logic.mustache", this.packagePath() + File.separatorChar + this.mixinPackage + File.separatorChar + this.logicPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__services.mustache", this.packagePath() + File.separatorChar + this.mixinPackage + File.separatorChar + this.logicPackage, "__init__.py"));
 
     this.testPackage = this.packageName + "." + this.testPackage;
   }

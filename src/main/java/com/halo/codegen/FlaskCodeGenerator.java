@@ -22,7 +22,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
   // code
   private String configPackage = "config";
   private String mixinPackage = "mixin";
-  private String logicPackage = "logic";
+  private String servicesPackage = "services";
 
 
   /**
@@ -83,7 +83,6 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("mixin_hooks.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_hooks.py"));
     this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_api.py"));
     this.supportingFiles.add(new SupportingFile("mixin_handler.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_handler.py"));
-    this.supportingFiles.add(new SupportingFile("__init__logic.mustache", this.packagePath() + File.separatorChar + this.mixinPackage + File.separatorChar + this.logicPackage, "__init__.py"));
     this.supportingFiles.add(new SupportingFile("utilx.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "utilx.py"));
 
     this.supportingFiles.add(new SupportingFile("aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));
@@ -96,6 +95,9 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("buildspec.mustache", this.serverlessDir, "buildspec.yml"));
     this.supportingFiles.add(new SupportingFile("sls_fargate_settings.mustache", this.serverlessDir, "sls_fargate_settings.json"));
     this.supportingFiles.add(new SupportingFile("sls_lambda_settings.mustache", this.serverlessDir, "sls_lambda_settings.json"));
+
+    this.supportingFiles.add(new SupportingFile("__init__services.mustache", this.packagePath() + File.separatorChar + this.servicesPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("service_factory.mustache", this.packagePath() + File.separatorChar + this.servicesPackage, "service_factory.py"));
 
     this.testPackage = this.packageName + "." + this.testPackage;
   }

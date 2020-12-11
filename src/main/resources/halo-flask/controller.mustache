@@ -10,7 +10,7 @@ from {{packageName}} import util
 {{#operations}}
 {{#operation}}
 
-from ..services.{{classFilename}}_service import {{classname}}Service_{{operationId}}
+from ..services.service_factory import ServiceFactory
 
 def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}):  # noqa: E501
     """{{#summary}}{{.}}{{/summary}}{{^summary}}{{operationId}}{{/summary}}
@@ -128,9 +128,11 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
     from ..mixin.utilx import Util
     bian_context = Util.get_halo_context(request)
 
-    service = {{classname}}Service_{{operationId}}()
+    method_id = "{{operationId}}"
 
-    bian_response = service.do_process(bian_context,"{{operationId}}",request_vars)
+    service = ServiceFactory.create_service(method_id)
+
+    bian_response = service.do_process(bian_context,method_id,request_vars)
 
     return bian_response.payload, bian_response.code, bian_response.headers
 
