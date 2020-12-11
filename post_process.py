@@ -21,7 +21,7 @@ if file_path.find("controller_service") > 0:
     if not os.path.exists(target_dir):
         os.mkdir(target_dir)
     #file2.write("target:"+target_dir+"\n")
-    new_name=file_name.replace("_controller_service.py","_service.py")
+    new_name = file_name.replace("_controller_service.py","_service.py")
     new_path = os.path.join(target_dir,new_name)
     #file2.write("new_path:"+new_path+"\n")
     try:
