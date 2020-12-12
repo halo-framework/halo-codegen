@@ -57,7 +57,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
      */
     // added
     this.apiTemplateFiles.put("service.mustache", "_service.py");
-    this.apiTemplateFiles.put("service_map.mustache", ".json");
+    this.apiTemplateFiles.put("service_map.mustache", "_json.py");
 
   }
 
