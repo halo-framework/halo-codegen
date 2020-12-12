@@ -32,7 +32,7 @@ if file_path.find("controller_service") > 0:
         pass
     #file2.write("fixed:"+new_path+"\n")
 #file2.close()
-if file_path.find(".json") > 0:
+if file_path.find("_controller.json") > 0:
     dir = os.path.dirname(file_path)
     #file2.write("dir:"+dir+"\n")
     file_name = os.path.basename(file_path)
