@@ -25,7 +25,7 @@ if file_path.find("controller_service") > 0:
         file1.write("error:"+str(e)+"\n")
         pass
 if file_path.find("_controller_json") > 0:
-    file1.write("jaon:"+file_path+"\n")
+    file1.write("json:"+file_path+"\n")
     target_dir = os.path.join(parent_dir,"config")
     if not os.path.exists(target_dir):
         os.mkdir(target_dir)
