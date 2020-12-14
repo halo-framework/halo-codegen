@@ -35,6 +35,12 @@ if file_path.find("_controller_json") > 0:
     target_dir = os.path.join(target_dir,"config")
     if not os.path.exists(target_dir):
         os.mkdir(target_dir)
+    #service_file_name = file_name.replace("_controller_json.py","_service")
+    #with open(file_path, 'r') as fi:
+    #        txt = fi.read()
+    #txt1 = txt.replace(".app.services.",".app.services."+service_file_name+".")
+    #with open(file_path, 'w') as fi:
+    #        fi.write(txt1)
     new_name = file_name.replace("_controller_json.py",".json")
     new_path = os.path.join(target_dir,new_name)
     try:
@@ -44,6 +50,7 @@ if file_path.find("_controller_json") > 0:
         file1.write("error:"+str(e)+"\n")
         pass
 if file_path.find("service_factory") > 0:
+    #move controllers
     parent_dir = os.path.dirname(parent_dir)
     source_dir = os.path.join(parent_dir,"controllers")
     target_dir = os.path.join(parent_dir,"ui","rest","controllers")

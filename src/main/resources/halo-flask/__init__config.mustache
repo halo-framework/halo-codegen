@@ -413,7 +413,7 @@ class Config(object):
                     import ast
                     MAPPING = ast.literal_eval(fi.read())
                     for key in MAPPING:
-                        FACTORY_CLASS_LIST[key] = FUNC_NAME+".services."+service_file_name+"."+MAPPING[key]
+                        FACTORY_CLASS_LIST[key] = FUNC_NAME+".app.services."+service_file_name+"."+MAPPING[key]
             except FileNotFoundError as e:
                 raise e
 
