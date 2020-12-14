@@ -17,7 +17,7 @@ else:
     STAGE = LOC
 
 def create_app()-> Flask:
-    _app = connexion.App(__name__, specification_dir='./openapi/')
+    _app = connexion.App(__name__, specification_dir='ui/rest/openapi/')
     _app.app.json_encoder = encoder.JSONEncoder
     with _app.app.app_context():
         path = "/" + STAGE
@@ -40,10 +40,10 @@ def create_app()-> Flask:
 
 
 def configure_app(flask_app:Flask):
-    flask_app.config.from_object(f"{{packageName}}.config.Config_{os.getenv('HALO_STAGE', LOC)}")
+    flask_app.config.from_object(f"{{packageName}}.ui.config.Config_{os.getenv('HALO_STAGE', LOC)}")
 
 def setup_app(flask_app:Flask):
-    from {{packageName}}.mixin.mixin_hooks import before_first_request_func,before_request_func,after_request_func,teardown_request_func
+    from {{packageName}}.app.hooks import before_first_request_func,before_request_func,after_request_func,teardown_request_func
 
     @flask_app.before_first_request
     def before_first_request():

@@ -1,0 +1,8 @@
+{
+  "packageName": "tester",
+  "basePackage": "tester",
+  "apiPackage": "ui.rest.controllers",
+  "modelPackage": "domain.model",
+  "groupId": "tester",
+  "artifactId": "halo-flask-codegenerator"
+}

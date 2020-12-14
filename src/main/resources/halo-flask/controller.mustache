@@ -10,7 +10,7 @@ from {{packageName}} import util
 {{#operations}}
 {{#operation}}
 
-from ..services.service_factory import ServiceFactory
+from {{packageName}}.app.services.service_factory import ServiceFactory
 
 def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}):  # noqa: E501
     """{{#summary}}{{.}}{{/summary}}{{^summary}}{{operationId}}{{/summary}}
@@ -120,12 +120,12 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
     {{/allParams}}
 
     if 'collection_filter' in request_vars:
-        from ..mixin.utilx import get_flask_filters
+        from {{packageName}}.app.utilx import get_flask_filters
         from halo_app.context import HaloContext
         app_filters = get_flask_filters(request_vars['collection_filter'],request.headers.get(HaloContext.CORRELATION))
         request_vars['collection_filter'] = app_filters
 
-    from ..mixin.utilx import Util
+    from {{packageName}}.app.utilx import Util
     bian_context = Util.get_halo_context(request)
 
     method_id = "{{operationId}}"

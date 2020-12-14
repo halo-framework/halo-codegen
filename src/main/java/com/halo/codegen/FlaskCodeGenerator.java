@@ -13,6 +13,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
 
   protected String apiVersion = "1.0.0";
 
+  //json config dirs
   private String envDir = "env";
   private String envApiDir = "api";
   private String envConfigDir = "config";
@@ -20,10 +21,41 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
   private String dockerDir = "docker";
   private String serverlessDir = "serverless";
   // code
-  private String configPackage = "config";
-  private String mixinPackage = "mixin";
+  private String uiPackage = "ui";
+  private String appPackage = "app";
+  private String domainPackage = "domain";
+  private String infraPackage = "infra";
+  //in ui
+  private String restPackage = "rest";
+  //private String graphPackage = "graph";
+  private String cliPackage = "cli";
+  //in app
   private String servicesPackage = "services";
+  //in domain
+  //model package
+  //in infra
+  private String apisPackage = "apis";
+  //general
+  private String configPackage = "config";
 
+  /**
+   *
+   * generate
+   * -g
+   * halo-flask
+   * -i
+   * openapi.yaml
+   * -o
+   * tests/codeout6
+   * --package-name
+   * tester
+   * --api-package
+   * ui.rest
+   * --model-package
+   * domain.model
+   * --enable-post-process-file
+   *
+   */
 
   /**
    * Configures a friendly name for the generator.  This will be used by the generator
@@ -62,6 +94,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
   }
 
   protected void addSupportingFiles() {
+    //original supporting files
     this.supportingFiles.add(new SupportingFile("gitignore.mustache", "", ".gitignore"));
     //this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", "", "Dockerfile"));
     this.supportingFiles.add(new SupportingFile("dockerignore.mustache", "", ".dockerignore"));
@@ -72,34 +105,44 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("encoder.mustache", this.packagePath(), "encoder.py"));
     this.supportingFiles.add(new SupportingFile("__init__test.mustache", this.packagePath() + File.separatorChar + this.testPackage, "__init__.py"));
     this.supportingFiles.add(new SupportingFile("__init__app.mustache", this.packagePath(), "__init__.py"));
-    // added
+    // added in env
     this.supportingFiles.add(new SupportingFile(".env.loc.mustache", this.envDir , ".env.loc"));
     this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "__init__.py"));
     this.supportingFiles.add(new SupportingFile("startup_props.mustache", this.envDir + File.separatorChar + this.envConfigDir, "startup_props.json"));
-
-    this.supportingFiles.add(new SupportingFile("__init__config.mustache", this.packagePath() + File.separatorChar + this.configPackage, "__init__.py"));
-
-    this.supportingFiles.add(new SupportingFile("__init__mixin.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "__init__.py"));
-    this.supportingFiles.add(new SupportingFile("mixin_err_msg.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_err_msg.py"));
-    this.supportingFiles.add(new SupportingFile("mixin_hooks.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_hooks.py"));
-    this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_api.py"));
-    this.supportingFiles.add(new SupportingFile("mixin_handler.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "mixin_handler.py"));
-    this.supportingFiles.add(new SupportingFile("utilx.mustache", this.packagePath() + File.separatorChar + this.mixinPackage, "utilx.py"));
-
+    //added in base
     this.supportingFiles.add(new SupportingFile("aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));
     this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", this.dockerDir, "Dockerfile"));
     this.supportingFiles.add(new SupportingFile("nginx.mustache", this.dockerDir, "nginx.conf"));
     this.supportingFiles.add(new SupportingFile("start.mustache", this.dockerDir, "start.sh"));
     this.supportingFiles.add(new SupportingFile("uwsgi.mustache", this.dockerDir, "uwsgi.ini"));
-
+    //added in serverless
     this.supportingFiles.add(new SupportingFile("aws_ami_config.mustache", this.serverlessDir, "aws_ami_config.txt"));
     this.supportingFiles.add(new SupportingFile("buildspec.mustache", this.serverlessDir, "buildspec.yml"));
     this.supportingFiles.add(new SupportingFile("sls_fargate_settings.mustache", this.serverlessDir, "sls_fargate_settings.json"));
     this.supportingFiles.add(new SupportingFile("sls_lambda_settings.mustache", this.serverlessDir, "sls_lambda_settings.json"));
+    //added ui
+    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage+ File.separatorChar + this.restPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage+ File.separatorChar + this.cliPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__config.mustache", this.packagePath() + File.separatorChar + this.uiPackage + File.separatorChar + this.configPackage, "__init__.py"));
+    //added app
+    this.supportingFiles.add(new SupportingFile("__init__app_dir.mustache", this.packagePath() + File.separatorChar + this.appPackage, "__init__.py"));
+    // added domain
+    this.supportingFiles.add(new SupportingFile("__init__domain.mustache", this.packagePath() + File.separatorChar + this.domainPackage, "__init__.py"));
+    //added infra
+    this.supportingFiles.add(new SupportingFile("__init__infra.mustache", this.packagePath() + File.separatorChar + this.infraPackage, "__init__.py"));
+    //added in app/services
+    this.supportingFiles.add(new SupportingFile("__init__services.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.servicesPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("service_factory.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.servicesPackage, "service_factory.py"));
+    //added in infra/apis
+    this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.infraPackage + File.separatorChar + this.apisPackage, "apis.py"));
+    //added in app
+    this.supportingFiles.add(new SupportingFile("mixin_err_msg.mustache", this.packagePath() + File.separatorChar + this.appPackage, "err_msg.py"));
+    this.supportingFiles.add(new SupportingFile("mixin_hooks.mustache", this.packagePath() + File.separatorChar + this.appPackage, "hooks.py"));
+    this.supportingFiles.add(new SupportingFile("mixin_handler.mustache", this.packagePath() + File.separatorChar + this.appPackage, "handler.py"));
+    this.supportingFiles.add(new SupportingFile("utilx.mustache", this.packagePath() + File.separatorChar + this.appPackage, "utilx.py"));
 
-    this.supportingFiles.add(new SupportingFile("__init__services.mustache", this.packagePath() + File.separatorChar + this.servicesPackage, "__init__.py"));
-    this.supportingFiles.add(new SupportingFile("service_factory.mustache", this.packagePath() + File.separatorChar + this.servicesPackage, "service_factory.py"));
-
+    //-p com.my.company.codegen
     this.testPackage = this.packageName + "." + this.testPackage;
   }
 
