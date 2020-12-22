@@ -12,13 +12,13 @@ import importlib
 
 from halo_app.classes import AbsBaseClass
 from halo_app.const import HTTPChoice,LOC
-from halo_app.context import HaloContext
+from halo_app.app.context import HaloContext
 from halo_app.exceptions import ApiTimeOutExpired, CacheError, HaloException, ProviderError,ReflectException
 from halo_app.providers.providers import get_provider,ONPREM
 from halo_app.exceptions import NoCorrelationIdException
 from halo_app.logs import log_json
 from halo_app.reflect import Reflect
-from halo_app.app.viewsx import AbsBaseService
+from halo_app.app.viewsx import AbsBoundaryService
 from halo_app.settingsx import settingsx
 
 settings = settingsx()
@@ -31,7 +31,7 @@ class ServiceFactory(AbsBaseClass):
     def create_service(method_id):
         if method_id in settings.FACTORY_CLASS_LIST:
             class_name = settings.FACTORY_CLASS_LIST[method_id]
-            clazz = Reflect.instantiate(class_name, AbsBaseService)
+            clazz = Reflect.instantiate(class_name, AbsBoundaryService)
             return clazz
         raise ReflectException("ServiceFactory:"+method_id)
 

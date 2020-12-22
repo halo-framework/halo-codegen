@@ -121,7 +121,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     if 'collection_filter' in request_vars:
         from {{packageName}}.app.utilx import get_flask_filters
-        from halo_app.context import HaloContext
+        from halo_app.app.context import HaloContext
         app_filters = get_flask_filters(request_vars['collection_filter'],request.headers.get(HaloContext.CORRELATION))
         request_vars['collection_filter'] = app_filters
 

@@ -12,7 +12,7 @@ import importlib
 
 from halo_app.classes import AbsBaseClass
 from halo_app.const import HTTPChoice,LOC
-from halo_app.context import HaloContext
+from halo_app.app.context import HaloContext
 from halo_app.exceptions import ApiTimeOutExpired, CacheError, HaloException, ProviderError
 from halo_app.providers.providers import get_provider,ONPREM
 from halo_app.exceptions import NoCorrelationIdException
@@ -24,7 +24,7 @@ settings = settingsx()
 logger = logging.getLogger(__name__)
 
 def get_flask_filters(collection_filter,trace_id):
-    from halo_app.context import HaloContext
+    from halo_app.app.context import HaloContext
     import json
     from flask_filter.schemas import FilterSchema
     filter_schema = FilterSchema()
