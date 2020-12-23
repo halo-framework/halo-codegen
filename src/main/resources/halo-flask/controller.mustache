@@ -11,6 +11,7 @@ from {{packageName}} import util
 {{#operation}}
 
 from {{packageName}}.app.services.service_factory import ServiceFactory
+from halo_bian.bian.util import BianUtil
 
 def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}):  # noqa: E501
     """{{#summary}}{{.}}{{/summary}}{{^summary}}{{operationId}}{{/summary}}
@@ -132,7 +133,9 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     service = ServiceFactory.create_service(method_id)
 
-    bian_response = service.do_process(bian_context,method_id,request_vars)
+    bian_request = BianUtil.create_bian_request(bian_context,method_id,request_vars)
+
+    bian_response = service.execute(bian_request)
 
     return bian_response.payload, bian_response.code, bian_response.headers
 

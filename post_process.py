@@ -27,6 +27,12 @@ if file_path.find("controller_service") > 0:
     except Exception as e:
         file1.write("error:"+str(e)+"\n")
         pass
+    if new_name.startswith("retrieve_"):
+        with open(new_path, 'r') as fi:
+            txt = fi.read()
+            txt1 = txt.replace("AbsBianCommandHandler","AbsBianQueryHandler")
+        with open(new_path, 'w') as fi:
+            fi.write(txt1)
 if file_path.find("_controller_json") > 0:
     file1.write("json:"+file_path+"\n")
     target_dir = os.path.join(parent_dir,"ui")
