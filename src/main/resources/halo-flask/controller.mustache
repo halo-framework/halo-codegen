@@ -12,6 +12,7 @@ from {{packageName}} import util
 
 from {{packageName}}.app.services.service_factory import ServiceFactory
 from halo_bian.bian.util import BianUtil
+from halo_bian.bian.context import BianContext
 
 def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}):  # noqa: E501
     """{{#summary}}{{.}}{{/summary}}{{^summary}}{{operationId}}{{/summary}}
@@ -122,20 +123,18 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     if 'collection_filter' in request_vars:
         from {{packageName}}.app.utilx import get_flask_filters
-        from halo_app.app.context import HaloContext
-        app_filters = get_flask_filters(request_vars['collection_filter'],request.headers.get(HaloContext.CORRELATION))
+        app_filters = get_flask_filters(request_vars['collection_filter'],request.headers.get(BianContext.CORRELATION))
         request_vars['collection_filter'] = app_filters
 
-    from {{packageName}}.app.utilx import Util
-    bian_context = Util.get_halo_context(request)
+    bian_context = BianUtil.get_bian_context(request)
 
     method_id = "{{operationId}}"
 
-    service = ServiceFactory.create_service(method_id)
+    boundary_service = ServiceFactory.map_boundary_service(method_id)
 
     bian_request = BianUtil.create_bian_request(bian_context,method_id,request_vars)
 
-    bian_response = service.execute(bian_request)
+    bian_response = boundary_service.execute(bian_request)
 
     return bian_response.payload, bian_response.code, bian_response.headers
 
