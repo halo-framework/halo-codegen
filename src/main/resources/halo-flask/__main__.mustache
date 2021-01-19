@@ -69,7 +69,7 @@ def register_halo(flask_app: Flask):
     with flask_app.app_context():
         from halo_app.ssm import set_app_param_config, set_host_param_config
         from halo_app.infra.apis import load_api_config
-        from halo_app.app.viewsx import load_global_data
+        from halo_app.app.globals import load_global_data
         from halo_app.base_util import BaseUtil
         #flask_app.config["SSM_TYPE"] = 'ONPREM'
         flask_app.config["APP_NAME"] = "abc"

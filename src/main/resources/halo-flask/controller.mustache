@@ -1,18 +1,17 @@
 import connexion
 import six
-
-from halo_app.const import HTTPChoice
 from flask import request
+from halo_app.const import HTTPChoice
+from halo_app.sys_util import Util as AppUtil
+from halo_bian.bian.util import BianUtil
+from halo_bian.bian.app.context import BianContext
+
 	
 {{#imports}}{{import}}  # noqa: E501
 {{/imports}}
 from {{packageName}} import util
 {{#operations}}
 {{#operation}}
-
-from {{packageName}}.app.services.service_factory import ServiceFactory
-from halo_bian.bian.util import BianUtil
-from halo_bian.bian.context import BianContext
 
 def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}):  # noqa: E501
     """{{#summary}}{{.}}{{/summary}}{{^summary}}{{operationId}}{{/summary}}
@@ -130,11 +129,11 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     method_id = "{{operationId}}"
 
-    boundary_service = ServiceFactory.map_boundary_service(method_id)
+    boundary = AppUtil.get_boundary()
 
     bian_request = BianUtil.create_bian_request(bian_context,method_id,request_vars)
 
-    bian_response = boundary_service.execute(bian_request)
+    bian_response = boundary.execute(bian_request)
 
     return bian_response.payload, bian_response.code, bian_response.headers
 
