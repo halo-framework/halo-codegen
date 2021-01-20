@@ -88,7 +88,7 @@ def register_halo(flask_app: Flask):
         else:
             file_dir = os.path.dirname(__file__)
             PROP_URL = os.path.join(file_dir, '..', 'env', 'config', "startup_props.json")
-            flask_app.config["INIT_CLASS_NAME"] = 'halo_bian.bian.app.globals.BianGlobalService'
+            flask_app.config["INIT_CLASS_NAME"] = 'halo_bian.bian.app.handler.BianGlobalService'
             flask_app.config["INIT_DATA_MAP"] = {'INIT_STATE': "Idle", 'PROP_URL': PROP_URL}
             load_global_data(flask_app.config["INIT_CLASS_NAME"], flask_app.config["INIT_DATA_MAP"])
 
