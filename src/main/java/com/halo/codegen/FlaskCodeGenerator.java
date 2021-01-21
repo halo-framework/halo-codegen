@@ -21,10 +21,11 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
   private String dockerDir = "docker";
   private String serverlessDir = "serverless";
   // code
-  private String uiPackage = "ui";
+  private String uiPackage = "entrypoints";
   private String appPackage = "app";
   private String domainPackage = "domain";
   private String infraPackage = "infra";
+  private String view = "view";
   //in ui
   private String restPackage = "rest";
   //private String graphPackage = "graph";
@@ -105,6 +106,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("encoder.mustache", this.packagePath(), "encoder.py"));
     this.supportingFiles.add(new SupportingFile("__init__test.mustache", this.packagePath() + File.separatorChar + this.testPackage, "__init__.py"));
     this.supportingFiles.add(new SupportingFile("__init__app.mustache", this.packagePath(), "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("config.mustache", this.packagePath(), "config.py"));
     // added in env
     this.supportingFiles.add(new SupportingFile(".env.loc.mustache", this.envDir , ".env.loc"));
     this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "__init__.py"));
@@ -131,6 +133,8 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("__init__domain.mustache", this.packagePath() + File.separatorChar + this.domainPackage, "__init__.py"));
     //added infra
     this.supportingFiles.add(new SupportingFile("__init__infra.mustache", this.packagePath() + File.separatorChar + this.infraPackage, "__init__.py"));
+    //added view
+    this.supportingFiles.add(new SupportingFile("__init__view.mustache", this.packagePath() + File.separatorChar + this.infraPackage, "__init__.py"));
     //added in app/services
     this.supportingFiles.add(new SupportingFile("__init__services.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.servicesPackage, "__init__.py"));
     this.supportingFiles.add(new SupportingFile("service_factory.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.servicesPackage, "service_factory.py"));
