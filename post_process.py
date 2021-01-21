@@ -35,7 +35,7 @@ if file_path.find("controller_service") > 0:
             fi.write(txt1)
 if file_path.find("_controller_json") > 0:
     file1.write("json:"+file_path+"\n")
-    target_dir = os.path.join(parent_dir,"ui")
+    target_dir = os.path.join(parent_dir,"entrypoints")
     if not os.path.exists(target_dir):
             os.mkdir(target_dir)
     target_dir = os.path.join(target_dir,"config")
@@ -59,7 +59,7 @@ if file_path.find("service_factory") > 0:
     #move controllers
     parent_dir = os.path.dirname(parent_dir)
     source_dir = os.path.join(parent_dir,"controllers")
-    target_dir = os.path.join(parent_dir,"ui","rest","controllers")
+    target_dir = os.path.join(parent_dir,"entrypoints","rest","controllers")
     try:
       #os.rename(file_path, new_path)
       shutil.move(source_dir, target_dir)
@@ -68,7 +68,7 @@ if file_path.find("service_factory") > 0:
         pass
     #swagger
     source_dir = os.path.join(parent_dir,"openapi")
-    target_dir = os.path.join(parent_dir,"ui","rest","openapi")
+    target_dir = os.path.join(parent_dir,"entrypoints","rest","openapi")
     try:
       #os.rename(file_path, new_path)
       shutil.move(source_dir, target_dir)
@@ -78,7 +78,7 @@ if file_path.find("service_factory") > 0:
     source_file = os.path.join(target_dir,"openapi.yaml")
     with open(source_file, 'r') as fi:
         txt = fi.read()
-    txt1 = txt.replace(".controllers.",".ui.rest.controllers.")
+    txt1 = txt.replace(".controllers.",".entrypoints.rest.controllers.")
     with open(source_file, 'w') as fi:
             fi.write(txt1)
 
