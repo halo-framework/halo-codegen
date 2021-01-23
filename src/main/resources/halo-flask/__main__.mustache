@@ -40,7 +40,7 @@ def create_app()-> Flask:
 
 
 def configure_app(flask_app:Flask):
-    flask_app.config.from_object(f"{{packageName}}.config.Config_{os.getenv('HALO_STAGE', LOC)}")
+    flask_app.config.from_object(f"{{packageName}}.entrypoints.config.Config_{os.getenv('HALO_STAGE', LOC)}")
 
 def setup_app(flask_app:Flask):
     from {{packageName}}.app.hooks import before_first_request_func,before_request_func,after_request_func,teardown_request_func
