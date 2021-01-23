@@ -350,6 +350,19 @@ class Config(object):
     print('SSM_TYPE='+SSM_TYPE)
 
     ############################################################################################
+    ISOLATION_LEVEL = env.str('ISOLATION_LEVEL',default="REPEATABLE READ")
+
+
+    ############################################################################################
+    HALO_CONTEXT_LIST = []  # ["CORRELATION"]
+    HALO_CONTEXT_CLASS = None
+    HALO_CLIENT_CLASS = None
+    HALO_RESPONSE_FACTORY_CLASS = None
+    REQUEST_FILTER_CLASS = None
+    REQUEST_FILTER_CLEAR_CLASS = None
+    HALO_SECURITY_CLASS = None
+    SECURITY_FLAG = False
+    SESSION_MINUTES = 30
 
 
     API_CONFIG = None
