@@ -30,7 +30,7 @@ def create_app()-> Flask:
         register_shellcontext(_app.app)
         register_commands(_app.app)
 
-        URL = 'http://{host}:{port}{url_prefix}/entrypoints/'.format(
+        URL = 'http://{host}:{port}{url_prefix}/ui/'.format(
             host=_app.app.config['HOST'],
             port=_app.app.config['PORT'],
             url_prefix=path)
