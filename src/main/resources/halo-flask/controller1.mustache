@@ -115,23 +115,27 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
             {{/items}}
         {{/isMapContainer}}
 
+    if {{paramName}}:
+        request_vars["{{paramName}}"] = {{paramName}}
+
     {{/allParams}}
+
+    if 'collection_filter' in request_vars:
+        from {{packageName}}.app.utilx import get_flask_filters
+        app_filters = get_flask_filters(request_vars['collection_filter'],request.headers.get(BianContext.CORRELATION))
+        request_vars['collection_filter'] = app_filters
 
     bian_context = BianUtil.get_bian_context(request)
 
     method_id = "{{operationId}}"
 
-    boundary:IBoundaryService = SysUtil.get_boundary()
+    boundary = SysUtil.get_boundary()
 
-    bian_request = BianUtil.create_bian_request(bian_context,method_id,vars())
+    bian_request = BianUtil.create_bian_request(bian_context,method_id,request_vars)
 
     bian_response = boundary.execute(bian_request)
 
-    bian_response = BianUtil.process_ok(bian_response)
-
-    headers = BianUtil.get_headers(bian_response)
-
-    return bian_response.payload, bian_response.code, headers
+    return bian_response.payload, bian_response.code, bian_response.headers
 
 {{/operation}}
 {{/operations}}
