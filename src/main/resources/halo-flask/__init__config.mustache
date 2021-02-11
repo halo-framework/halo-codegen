@@ -449,6 +449,7 @@ class Config(object):
     HANDLER_TARGET = "handler_target"
     METHOD_HEADERS = {} # { "method_id":["var1","var2"]}
     COMMAND_ONLY = False
+    ORM_METHOD = env.str('ORM_METHOD',default='halo_app.infra.orm.start_mappers')
 
 
 print('== The base settings file has been loaded.')
