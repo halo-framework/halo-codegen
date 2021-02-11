@@ -63,9 +63,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     :rtype: {{#returnType}}{{.}}{{/returnType}}{{^returnType}}None{{/returnType}}
     """
-	
-    request_vars = {}
-	
+
     {{#allParams}}
         {{^isContainer}}
             {{#isDate}}
