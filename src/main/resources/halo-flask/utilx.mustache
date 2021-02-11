@@ -13,9 +13,10 @@ import importlib
 from halo_app.classes import AbsBaseClass
 from halo_app.const import HTTPChoice,LOC
 from halo_app.app.context import HaloContext
-from halo_app.exceptions import ApiTimeOutExpired, CacheError, HaloException, ProviderError
-from halo_app.providers.providers import get_provider,ONPREM
-from halo_app.exceptions import NoCorrelationIdException
+from halo_app.infra.exceptions import ApiTimeOutExpired, HaloException
+from halo_app.infra.providers.exceptions import ProviderError
+from halo_app.infra.providers.providers import get_provider,ONPREM
+from halo_app.app.exceptions import NoCorrelationIdException
 from halo_app.logs import log_json
 from halo_app.settingsx import settingsx
 
@@ -47,7 +48,7 @@ def get_flask_filters(collection_filter,trace_id):
         return payload,error_code
 
 def get_app_filters(collection_filters):
-    from halo_app.filters import Filter
+    from halo_app.view.query_filters import Filter
     arr = []
     for f in collection_filters:
         filter = Filter(f.field,f.OP,f.value)
