@@ -97,7 +97,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     headers = BianUtil.get_headers(bian_response)
 
-    return bian_response.payload, bian_response.code, headers
+    return jsonify(bian_response.payload), bian_response.code, headers
 
 {{/operation}}
 {{/operations}}
