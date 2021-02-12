@@ -14,7 +14,7 @@ file1 = open(log_path, "a")
 file1.write(file_path+"\n")
 if file_path.find("retrieve_controller.py") > 0:
     with open(block_path, 'r') as blockfile:
-    block = blockfile.read()
+        block = blockfile.read()
     with open(file_path, 'r') as fi:
         txt = fi.read()
         txt1 = txt.replace("#replace_block",block)

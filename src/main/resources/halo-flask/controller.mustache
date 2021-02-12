@@ -11,6 +11,7 @@ from halo_bian.bian.app.context import BianContext
 {{#imports}}{{import}}  # noqa: E501
 {{/imports}}
 from {{packageName}} import util
+from {{packageName}}.app.utilx import get_flask_filters
 {{#operations}}
 {{#operation}}
 
@@ -63,24 +64,6 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     :rtype: {{#returnType}}{{.}}{{/returnType}}{{^returnType}}None{{/returnType}}
     """
-
-    if 'collection_filter' in vars() or 'queryparams' in vars():
-        from {{packageName}}.app.utilx import get_flask_filters
-        try:
-            if 'collection_filter' in vars():
-                item = vars()['collection_filter']
-                collection_filter = get_flask_filters(vars()['collection_filter'])
-            else:
-                item = vars()['queryparams']
-                queryparams = get_flask_filters(vars()['queryparams'])
-        except Exception as e:
-            error_code = 400
-            payload = {"error": {"error_code": error_code, "error_message": e.__str__(),
-                "error_detail": 'filter format error',
-                "data": item,
-                "trace_id": request.headers.get(BianContext.CORRELATION)}
-            }
-            return jsonify(payload), error_code
 
     #replace_block
 
