@@ -24,7 +24,7 @@ settings = settingsx()
 
 logger = logging.getLogger(__name__)
 
-def get_flask_filters(collection_filter,trace_id):
+def get_flask_filters(collection_filter):
     from halo_app.app.context import HaloContext
     import json
     from flask_filter.schemas import FilterSchema
@@ -40,12 +40,8 @@ def get_flask_filters(collection_filter,trace_id):
             filters = [filters]
         return get_app_filters(filters)
     except Exception as e: #{'_schema': ['Invalid input type.']}
-        error_code = 400
-        payload = {"error":{"error_code": error_code, "error_message": e.__str__(), "error_detail": collection_filter,
-            "data": "",
-            "trace_id": trace_id}
-        }
-        return payload,error_code
+        logger.error("Encountered a request error in filter: " + str(e))
+        raise e
 
 def get_app_filters(collection_filters):
     from halo_app.view.query_filters import Filter
