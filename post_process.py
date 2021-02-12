@@ -5,18 +5,19 @@ import os
 import shutil
 
 file_path=sys.argv[1]
+block_path=os.environ["RTRV_BLOCK"]
 dir = os.path.dirname(file_path)
 parent_dir = os.path.dirname(dir)
 file_name = os.path.basename(file_path)
 log_path = os.path.join(parent_dir,"log_file.txt")
 file1 = open(log_path, "a")
 file1.write(file_path+"\n")
-block_path = os.path.join(dir,"block.txt")
-if file_path.find("retrieve_controller") > 0:
-    with open(block_path, 'r') as tempfile:
-        with open(file_path, 'r') as fi:
-            txt = fi.read()
-            txt1 = txt.replace("#replace_block",tempfile.read())
+if file_path.find("retrieve_controller.py") > 0:
+    with open(block_path, 'r') as blockfile:
+    block = blockfile.read()
+    with open(file_path, 'r') as fi:
+        txt = fi.read()
+        txt1 = txt.replace("#replace_block",block)
     with open(file_path, 'w') as fi:
         fi.write(txt1)
 if file_path.find("controller_service") > 0:
