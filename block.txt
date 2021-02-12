@@ -1,5 +1,4 @@
 if 'collection_filter' in vars() or 'queryparams' in vars():
-        from {{packageName}}.app.utilx import get_flask_filters
         try:
             if 'collection_filter' in vars():
                 item = vars()['collection_filter']
