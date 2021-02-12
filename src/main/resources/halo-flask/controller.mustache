@@ -82,6 +82,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
             }
             return jsonify(payload), error_code
 
+    #replace_block
 
     bian_context = BianUtil.get_bian_context(request)
 

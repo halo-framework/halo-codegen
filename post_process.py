@@ -11,6 +11,14 @@ file_name = os.path.basename(file_path)
 log_path = os.path.join(parent_dir,"log_file.txt")
 file1 = open(log_path, "a")
 file1.write(file_path+"\n")
+block_path = os.path.join(dir,"block.txt")
+if file_path.find("retrieve_controller") > 0:
+    with open(block_path, 'r') as tempfile:
+        with open(file_path, 'r') as fi:
+            txt = fi.read()
+            txt1 = txt.replace("#replace_block",tempfile.read())
+    with open(file_path, 'w') as fi:
+        fi.write(txt1)
 if file_path.find("controller_service") > 0:
     file1.write("service:"+file_path+"\n")
     target_dir = os.path.join(parent_dir,"app")
