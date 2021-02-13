@@ -3,6 +3,8 @@
 import sys
 import os
 import shutil
+import time
+import datetime
 
 file_path=sys.argv[1]
 block_path=os.environ["RTRV_BLOCK"]
@@ -10,10 +12,13 @@ log_dir=os.environ["POST_LOG"]
 dir = os.path.dirname(file_path)
 parent_dir = os.path.dirname(dir)
 file_name = os.path.basename(file_path)
-log_path = os.path.join(log_dir,"log_file.txt")
+log_path = os.path.join(log_dir,"post_log_file.txt")
 file1 = open(log_path, "a+")
-file1.write(file_path+"\n")
+ts = time.time()
+sttime = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H:%M:%S - ')
+file1.write(sttime+file_path+"\n")
 if file_path.find("retrieve_controller.py") > 0:
+    file1.write(sttime+"retrieve_controller:"+file_path+"\n")
     with open(block_path, 'r') as blockfile:
         block = blockfile.read()
     with open(file_path, 'r') as fi:
@@ -22,7 +27,7 @@ if file_path.find("retrieve_controller.py") > 0:
     with open(file_path, 'w') as fi:
         fi.write(txt1)
 if file_path.find("controller_service") > 0:
-    file1.write("service:"+file_path+"\n")
+    file1.write(sttime+"service:"+file_path+"\n")
     target_dir = os.path.join(parent_dir,"app")
     if not os.path.exists(target_dir):
             os.mkdir(target_dir)
@@ -35,7 +40,7 @@ if file_path.find("controller_service") > 0:
         #os.rename(file_path, new_path)
         shutil.move(file_path, new_path)
     except Exception as e:
-        file1.write("error:"+str(e)+"\n")
+        file1.write(sttime+"error:"+str(e)+"\n")
         pass
     if new_name.startswith("retrieve_"):
         with open(new_path, 'r') as fi:
@@ -44,7 +49,7 @@ if file_path.find("controller_service") > 0:
         with open(new_path, 'w') as fi:
             fi.write(txt1)
 if file_path.find("_controller_json") > 0:
-    file1.write("json:"+file_path+"\n")
+    file1.write(sttime+"json:"+file_path+"\n")
     target_dir = os.path.join(parent_dir,"entrypoints")
     if not os.path.exists(target_dir):
             os.mkdir(target_dir)
@@ -63,9 +68,10 @@ if file_path.find("_controller_json") > 0:
         #os.rename(file_path, new_path)
         shutil.move(file_path, new_path)
     except Exception as e:
-        file1.write("error:"+str(e)+"\n")
+        file1.write(sttime+"error:"+str(e)+"\n")
         pass
 if file_path.find("service_factory") > 0:
+    file1.write(sttime+"service_factory:"+file_path+"\n")
     #move controllers
     parent_dir = os.path.dirname(parent_dir)
     source_dir = os.path.join(parent_dir,"controllers")
@@ -74,7 +80,7 @@ if file_path.find("service_factory") > 0:
       #os.rename(file_path, new_path)
       shutil.move(source_dir, target_dir)
     except Exception as e:
-        file1.write("error:"+str(e)+"\n")
+        file1.write(sttime+"error:"+str(e)+"\n")
         pass
     #swagger
     source_dir = os.path.join(parent_dir,"openapi")
@@ -83,7 +89,7 @@ if file_path.find("service_factory") > 0:
       #os.rename(file_path, new_path)
       shutil.move(source_dir, target_dir)
     except Exception as e:
-        file1.write("error:"+str(e)+"\n")
+        file1.write(sttime+"error:"+str(e)+"\n")
         pass
     source_file = os.path.join(target_dir,"openapi.yaml")
     with open(source_file, 'r') as fi:
