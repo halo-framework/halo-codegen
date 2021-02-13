@@ -6,11 +6,12 @@ import shutil
 
 file_path=sys.argv[1]
 block_path=os.environ["RTRV_BLOCK"]
+log_dir=os.environ["POST_LOG"]
 dir = os.path.dirname(file_path)
 parent_dir = os.path.dirname(dir)
 file_name = os.path.basename(file_path)
-log_path = os.path.join(parent_dir,"log_file.txt")
-file1 = open(log_path, "a")
+log_path = os.path.join(log_dir,"log_file.txt")
+file1 = open(log_path, "a+")
 file1.write(file_path+"\n")
 if file_path.find("retrieve_controller.py") > 0:
     with open(block_path, 'r') as blockfile:
