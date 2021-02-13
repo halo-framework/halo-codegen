@@ -2,13 +2,19 @@
 
 from __future__ import absolute_import
 import unittest
-
+import os
 from flask import json
 from six import BytesIO
 
 {{#imports}}{{import}}  # noqa: E501
 {{/imports}}
 from {{packageName}}.test import BaseTestCase
+from halo_app.const import LOC,DEV,TST,PRD
+
+if 'HALO_STAGE' in os.environ:
+    STAGE = os.environ['HALO_STAGE']
+else:
+    STAGE = LOC
 
 
 class {{#operations}}Test{{classname}}(BaseTestCase):
@@ -23,6 +29,7 @@ class {{#operations}}Test{{classname}}(BaseTestCase):
 
         {{{summary}}}
         """
+        path = "/" + STAGE
         {{#bodyParam}}
         {{paramName}} = {{{example}}}
         {{/bodyParam}}
@@ -38,7 +45,7 @@ class {{#operations}}Test{{classname}}(BaseTestCase):
         {{#formParams}}
         {{#-first}}data = dict({{/-first}}{{^-first}}            {{/-first}}{{paramName}}={{{example}}}{{#hasMore}},{{/hasMore}}{{#-last}}){{/-last}}
         {{/formParams}}
-        response = self.client.open(
+        response = self.client.open(path+
             '{{#contextPath}}{{{.}}}{{/contextPath}}{{{path}}}'{{#pathParams}}{{#-first}}.format({{/-first}}{{paramName}}={{{example}}}{{#hasMore}}, {{/hasMore}}{{^hasMore}}){{/hasMore}}{{/pathParams}},
             method='{{httpMethod}}',
             headers=headers{{#bodyParam}},
