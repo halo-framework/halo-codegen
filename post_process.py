@@ -50,19 +50,29 @@ if file_path.find("controller_service") > 0:
             fi.write(txt1)
 if file_path.find("_controller_json") > 0:
     file1.write(sttime+"json:"+file_path+"\n")
-    target_dir = os.path.join(parent_dir,"entrypoints")
+    target_dir = os.path.join(parent_dir,'..','env',"entrypoints")
     if not os.path.exists(target_dir):
             os.mkdir(target_dir)
     target_dir = os.path.join(target_dir,"config")
     if not os.path.exists(target_dir):
         os.mkdir(target_dir)
-    #service_file_name = file_name.replace("_controller_json.py","_service")
-    #with open(file_path, 'r') as fi:
-    #        txt = fi.read()
-    #txt1 = txt.replace(".app.services.",".app.services."+service_file_name+".")
-    #with open(file_path, 'w') as fi:
-    #        fi.write(txt1)
     new_name = file_name.replace("_controller_json.py",".json")
+    new_path = os.path.join(target_dir,new_name)
+    try:
+        #os.rename(file_path, new_path)
+        shutil.move(file_path, new_path)
+    except Exception as e:
+        file1.write(sttime+"error:"+str(e)+"\n")
+        pass
+if file_path.find("_controller_settings") > 0:
+    file1.write(sttime+"json:"+file_path+"\n")
+    target_dir = os.path.join(parent_dir,'..','env',"entrypoints")
+    if not os.path.exists(target_dir):
+            os.mkdir(target_dir)
+    target_dir = os.path.join(target_dir,"event")
+    if not os.path.exists(target_dir):
+        os.mkdir(target_dir)
+    new_name = file_name.replace("_controller_settings.py",".json")
     new_path = os.path.join(target_dir,new_name)
     try:
         #os.rename(file_path, new_path)
