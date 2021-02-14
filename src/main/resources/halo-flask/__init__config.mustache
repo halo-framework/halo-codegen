@@ -384,7 +384,7 @@ class Config(object):
     HANDLER_MAP = {}
     EVENT_SETTINGS = ENV_NAME + '_event_settings.json'
     file_dir = os.path.dirname(__file__)
-    file_path = os.path.join(file_dir,'..','..','..','env','config', EVENT_SETTINGS)
+    file_path = os.path.join(file_dir,'..','..','..','env','entrypoints','event', EVENT_SETTINGS)
     if os.path.exists(file_path):
         with open(file_path, 'r') as fi:
             map = json.load(fi)
@@ -422,10 +422,11 @@ class Config(object):
 
     FACTORY_CLASS_LIST = {}
     file_dir = os.path.dirname(__file__)
-    for f in os.listdir(file_dir):
+    target_dir = os.path.join(file_dir,'..','..','..', 'env','entrypoints','config')
+    for f in os.listdir(target_dir):
         if f.endswith(".json"):
             service_file_name = f.replace(".json","")+"_service"
-            file_path = os.path.join(file_dir,f)
+            file_path = os.path.join(target_dir,f)
             try:
                 with open(file_path, 'r') as fi:
                     import ast
