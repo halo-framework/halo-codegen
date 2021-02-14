@@ -38,8 +38,9 @@ class Config(object):
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    API_KEYS = ["1234"]
-    INSTANCE_ID = "123"
+    API_KEY = env.str('API_KEY')
+    API_KEYS = [API_KEY]
+    INSTANCE_ID = env.str('INSTANCE_ID','12345')
     ERR_MSG_CLASS = '{{packageName}}.app.err_msg'
 
     from halo_bian.bian.bian import FunctionalPatterns
