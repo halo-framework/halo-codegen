@@ -17,6 +17,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
   private String envDir = "env";
   private String envApiDir = "api";
   private String envConfigDir = "config";
+  private String envHandlerDir = "handler";
   // cloud addition
   private String dockerDir = "docker";
   private String serverlessDir = "serverless";
@@ -31,7 +32,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
   //private String graphPackage = "graph";
   private String cliPackage = "cli";
   //in app
-  private String servicesPackage = "services";
+  private String handlersPackage = "handlers";
   //in domain
   //model package
   //in infra
@@ -89,8 +90,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
      * will use the resource stream to attempt to read the templates.
      */
     // added
-    this.apiTemplateFiles.put("service.mustache", "_service.py");
-    this.apiTemplateFiles.put("service_map.mustache", "_json.py");
+    this.apiTemplateFiles.put("handler.mustache", "_handler.py");
     this.apiTemplateFiles.put("event_settings.mustache", "_settings.py");
   }
 
@@ -111,6 +111,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "__init__.py"));
     this.supportingFiles.add(new SupportingFile("startup_props.mustache", this.envDir + File.separatorChar + this.envConfigDir, "startup_props.json"));
     this.supportingFiles.add(new SupportingFile("data_mapping.mustache", this.envDir + File.separatorChar + this.envConfigDir, "data_mapping.json"));
+    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envHandlerDir, "__init__.py"));
     //added in base
     this.supportingFiles.add(new SupportingFile("aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));
     this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", this.dockerDir, "Dockerfile"));
@@ -136,8 +137,8 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     //added view
     this.supportingFiles.add(new SupportingFile("__init__view.mustache", this.packagePath() + File.separatorChar + this.infraPackage, "__init__.py"));
     //added in app/services
-    this.supportingFiles.add(new SupportingFile("__init__services.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.servicesPackage, "__init__.py"));
-    this.supportingFiles.add(new SupportingFile("service_factory.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.servicesPackage, "service_factory.py"));
+    this.supportingFiles.add(new SupportingFile("__init__handelers.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.handlersPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("service_factory.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.handlersPackage, "service_factory.py"));
     //added in infra/apis
     this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.infraPackage + File.separatorChar + this.apisPackage, "apis.py"));
     //added in app

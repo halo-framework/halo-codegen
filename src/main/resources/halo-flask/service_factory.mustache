@@ -26,14 +26,4 @@ settings = settingsx()
 
 logger = logging.getLogger(__name__)
 
-class ServiceFactory(AbsBaseClass):
-
-    @staticmethod
-    def map_boundary_service(method_id):
-        if method_id in settings.FACTORY_CLASS_LIST:
-            class_name = settings.FACTORY_CLASS_LIST[method_id]
-            clazz = Reflect.instantiate(class_name, IBoundaryService)
-            return clazz
-        raise ReflectException("ServiceFactory: "+method_id)
-
 
