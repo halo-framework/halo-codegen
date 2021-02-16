@@ -384,28 +384,34 @@ class Config(object):
     HANDLER_MAP = {}
     EVENT_SETTINGS = ENV_NAME + '_event_settings.json'
     file_dir = os.path.dirname(__file__)
-    file_path = os.path.join(file_dir,'..','..','..','env','entrypoints','event', EVENT_SETTINGS)
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as fi:
-            map = json.load(fi)
-            BUSINESS_EVENT_MAP = {}
-            for clazz in map:
-                bqs = map[clazz]
-                dictx = {}
-                for bq in bqs:
-                    BUSINESS_EVENT_MAP[clazz] = bq
-                    val = bqs[bq]
-                    dict = {}
-                    for action in val:
-                        item = val[action]
-                        file_path_data = os.path.join(file_dir, '..', '..','..', 'env', 'config', item['url'])
-                        print(file_path_data)
-                        with open(file_path_data, 'r') as fx:
-                             data = json.load(fx)
-                             dict[action] = { item['type'] : data }
-                        HANDLER_MAP[action] = {"class": clazz,"type":bq}
-                    dictx[bq] = dict
-                BUSINESS_EVENT_MAP[clazz] = dictx
+    dir_path = os.path.join(file_dir,'..','..','..','env','handler')
+    import ast
+    for file in os.listdir(dir_path):
+        if file.endswith(".json"):
+            with open(os.path.join(dir_path,file), 'r') as fi:
+                map = ast.literal_eval(fi.read())
+                BUSINESS_EVENT_MAP = {}
+                for clazz in map:
+                    bqs = map[clazz]
+                    dictx = {}
+                    for bq in bqs:
+                        BUSINESS_EVENT_MAP[clazz] = bq
+                        val = bqs[bq]
+                        dict = {}
+                        for action in val:
+                            item = val[action]
+                            if item["type"] != BusinessEventCategory.EMPTY.value and item["type"] != '':
+                                file_path_data = os.path.join(file_dir, '..', '..','..', 'env', 'config', item['url'])
+                                try:
+                                    with open(file_path_data, 'r') as fx:
+                                         data = json.load(fx)
+                                         dict[action] = { item['type'] : data }
+                                except Exception as e:
+                                    print("error:" + str(e))
+                                    raise e
+                            HANDLER_MAP[action] = {"class": clazz,"type":bq}
+                        dictx[bq] = dict
+                    BUSINESS_EVENT_MAP[clazz] = dictx
     else:
         print("no event config files")
 
