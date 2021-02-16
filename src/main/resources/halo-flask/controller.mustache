@@ -6,7 +6,7 @@ from halo_app.const import HTTPChoice
 from halo_app.sys_util import SysUtil
 from halo_bian.bian.util import BianUtil
 from halo_bian.bian.app.context import BianContext
-
+from halo_app.entrypoints import client_util
 	
 {{#imports}}{{import}}  # noqa: E501
 {{/imports}}
@@ -67,7 +67,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     #replace_block
 
-    bian_context = BianUtil.get_bian_context(request)
+    bian_context = client_util.get_halo_context(request.headers)
 
     method_id = "{{operationId}}"
 
