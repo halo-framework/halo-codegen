@@ -71,7 +71,7 @@ try:
                 handler_name = new_name.replace(".json","_handler")
                 with open(new_path, 'r') as fi:
                     txt = fi.read()
-                    txt1 = txt.replace("xxx_handler",handler_name)
+                    txt1 = txt.replace("xxx_handler",handler_name).replace('"command"','"query"')
                 with open(new_path, 'w') as fo:
                     fo.write(txt1)
         #move controllers
