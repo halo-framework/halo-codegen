@@ -38,7 +38,7 @@ from halo_bian.bian.bian import ActionTerms
 
 {{#operation}}
 
-class {{classname}}Service_{{operationId}}(AbsBianCommandHandler):
+class {{classname}}Handler_{{operationId}}(AbsBianCommandHandler):
     bian_action = ActionTerms.{{#lambda.uppercase}}{{tags.0.name}}{{/lambda.uppercase}}
 
 {{/operation}}
