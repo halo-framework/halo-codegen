@@ -26,8 +26,8 @@ try:
         with open(file_path, 'r') as fi:
             txt = fi.read()
             txt1 = txt.replace("#replace_block",block)
-        with open(file_path, 'w') as fi:
-            fi.write(txt1)
+        with open(file_path, 'w') as fo:
+            fo.write(txt1)
     if file_path.find("controller_handler") > 0:
         file1.write(sttime+"handler:"+file_path+"\n")
         target_dir = os.path.join(parent_dir,"app")
@@ -48,12 +48,12 @@ try:
             with open(new_path, 'r') as fi:
                 txt = fi.read()
                 txt1 = txt.replace("AbsBianCommandHandler","AbsBianQueryHandler")
-            with open(new_path, 'w') as fi:
-                fi.write(txt1)
+            with open(new_path, 'w') as fo:
+                fo.write(txt1)
     if file_path.find("service_factory") > 0:
         file1.write(sttime+"service_factory:"+file_path+"\n")
         parent_dir = os.path.dirname(parent_dir)
-        # move _controller_settings
+        # move handlers settings
         base_dir = os.path.dirname(parent_dir)
         src_dir = os.path.join(parent_dir,"controllers")
         target_dir = os.path.join(base_dir,'env','handler')
@@ -68,6 +68,12 @@ try:
                 except Exception as e:
                     file1.write(sttime+"error:"+str(e)+"\n")
                     pass
+                handler_name = new_name.replace(".json","_handler")
+                with open(new_path, 'r') as fi:
+                    txt = fi.read()
+                    txt1 = txt.replace("xxx_handler",handler_name)
+                with open(new_path, 'w') as fo:
+                    fo.write(txt1)
         #move controllers
         source_dir = os.path.join(parent_dir,"controllers")
         target_dir = os.path.join(parent_dir,"entrypoints","rest","controllers")
