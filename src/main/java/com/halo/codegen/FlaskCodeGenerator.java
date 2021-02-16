@@ -108,10 +108,10 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen imp
     this.supportingFiles.add(new SupportingFile("__init__app.mustache", this.packagePath(), "__init__.py"));
     // added in env
     this.supportingFiles.add(new SupportingFile(".env.loc.mustache", this.envDir , ".env.loc"));
-    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "__init__.json"));
     this.supportingFiles.add(new SupportingFile("startup_props.mustache", this.envDir + File.separatorChar + this.envConfigDir, "startup_props.json"));
     this.supportingFiles.add(new SupportingFile("data_mapping.mustache", this.envDir + File.separatorChar + this.envConfigDir, "data_mapping.json"));
-    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envHandlerDir, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envHandlerDir, "__init__.json"));
     //added in base
     this.supportingFiles.add(new SupportingFile("aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));
     this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", this.dockerDir, "Dockerfile"));
