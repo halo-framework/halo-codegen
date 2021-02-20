@@ -77,11 +77,11 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     bian_response = boundary.execute(bian_request)
 
-    bian_response = SysUtil.process_api_ok(bian_response,request.method)
+    api_response = SysUtil.process_api_ok(bian_response,request.method)
 
-    headers = BianUtil.get_headers(bian_response)
+    headers = BianUtil.get_headers(api_response)
 
-    return jsonify(bian_response.payload), bian_response.code, headers
+    return jsonify(api_response.payload), api_response.code, headers
 
 {{/operation}}
 {{/operations}}
