@@ -2,7 +2,7 @@
   "packageName": "tester",
   "basePackage": "tester",
   "apiPackage": "ui.rest.controllers",
-  "modelPackage": "domain.model",
+  "modelPackage": "entrypoints.rest.model",
   "groupId": "tester",
   "artifactId": "halo-flask-codegenerator"
 }
