@@ -11,8 +11,9 @@ from {{packageName}} import util
 T = typing.TypeVar('T')
 {{/supportPython2}}
 
+from halo_app.app.dto import AbsHaloDto
 
-class Model(object):
+class Model(AbsHaloDto):
     # openapiTypes: The key is attribute name and the
     # value is attribute type.
     openapi_types = {}
