@@ -1,15 +1,15 @@
 package com.halo.codegen;
 
-import org.openapitools.codegen.*;
-import org.openapitools.codegen.languages.AbstractPythonConnexionServerCodegen;
+import org.openapitools.codegen.CodegenConfig;
+import org.openapitools.codegen.SupportingFile;
+import org.openapitools.codegen.languages.SpringCodegen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
 import java.io.File;
 
-public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
-  private static final Logger LOGGER = LoggerFactory.getLogger(FlaskCodeGenerator.class);
+public class SpringAxonCodeGenerator extends SpringCodegen {
+  private static final Logger LOGGER = LoggerFactory.getLogger(SpringAxonCodeGenerator.class);
 
   protected String apiVersion = "1.0.0";
 
@@ -64,7 +64,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
   /**
    * Configures a friendly name for the generator.  This will be used by the generator
    * to select the library with the -g flag.
-   * 
+   *
    * @return the friendly name for the generator
    */
   @Override
@@ -75,7 +75,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
   /**
    * Returns human-friendly help for the generator.  Provide the consumer with help
    * tips, parameters here
-   * 
+   *
    * @return A string value for the help message
    */
   @Override
@@ -83,8 +83,8 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
     return "Generates a halo-flask client library.";
   }
 
-  public FlaskCodeGenerator() {
-    super("halo-flask", false);
+  public SpringAxonCodeGenerator() {
+    super();
      // the extension for each file to write
 
     /**
@@ -94,6 +94,10 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
     // added
     this.apiTemplateFiles.put("handler.mustache", "_handler.py");
     this.apiTemplateFiles.put("event_settings.mustache", "_settings.py");
+  }
+
+  protected String packagePath() {
+    return  sourceFolder;
   }
 
   protected void addSupportingFiles() {
@@ -153,7 +157,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
     this.supportingFiles.add(new SupportingFile("utilx.mustache", this.packagePath() + File.separatorChar + this.appPackage, "utilx.py"));
 
     //-p com.my.company.codegen
-    this.testPackage = this.packageName + "." + this.testPackage;
+    //this.testPackage = this.packageName + "." + this.testPackage;
   }
 
 }
