@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class FastapiCodeGenerator extends AbstractPythonConnexionServerCodegen implements CodegenConfig {
+public class FastapiCodeGenerator extends AbstractPythonConnexionServerCodegen {
   private static final Logger LOGGER = LoggerFactory.getLogger(FastapiCodeGenerator.class);
 
   protected String apiVersion = "1.0.0";

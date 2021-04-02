@@ -69,7 +69,7 @@ public class SpringAxonCodeGenerator extends SpringCodegen {
    */
   @Override
   public String getName() {
-    return "halo-flask";
+    return "halo-spring-axon";
   }
 
   /**
@@ -80,7 +80,7 @@ public class SpringAxonCodeGenerator extends SpringCodegen {
    */
   @Override
   public String getHelp() {
-    return "Generates a halo-flask client library.";
+    return "Generates a halo-spring-axon client library.";
   }
 
   public SpringAxonCodeGenerator() {
