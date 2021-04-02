@@ -4,5 +4,5 @@
   "apiPackage": "ui.rest.controllers",
   "modelPackage": "app.dto",
   "groupId": "tester",
-  "artifactId": "halo-flask-codegenerator"
+  "artifactId": "halo-codegenerator"
 }
