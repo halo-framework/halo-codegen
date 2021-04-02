@@ -85,6 +85,8 @@ public class SpringAxonCodeGenerator extends SpringCodegen {
   public SpringAxonCodeGenerator() {
     super();
      // the extension for each file to write
+    this.outputFolder = "generated-code/halo-spring-axon";
+    this.embeddedTemplateDir = this.templateDir = "halo-spring-axon";
 
     /**
      * Template Location.  This is the location which templates will be read from.  The generator
