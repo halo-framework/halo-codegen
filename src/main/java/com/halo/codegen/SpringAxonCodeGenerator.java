@@ -68,7 +68,7 @@ public class SpringAxonCodeGenerator extends SpringCodegen {
    */
   @Override
   public String getName() {
-    return "halo-spring-axon";
+    return "halo-springaxon";
   }
 
   /**
@@ -79,22 +79,22 @@ public class SpringAxonCodeGenerator extends SpringCodegen {
    */
   @Override
   public String getHelp() {
-    return "Generates a halo-spring-axon client library.";
+    return "Generates a halo-springaxon client library.";
   }
 
   public SpringAxonCodeGenerator() {
     super();
      // the extension for each file to write
-    this.outputFolder = "generated-code/halo-spring-axon";
-    this.embeddedTemplateDir = this.templateDir = "halo-spring-axon";
+    this.outputFolder = "generated-code/halo-springaxon";
+    this.embeddedTemplateDir = this.templateDir = "halo-springaxon";
 
     /**
      * Template Location.  This is the location which templates will be read from.  The generator
      * will use the resource stream to attempt to read the templates.
      */
     // added
-    this.apiTemplateFiles.put("handler.mustache", "_handler.py");
-    this.apiTemplateFiles.put("event_settings.mustache", "_settings.py");
+    //this.apiTemplateFiles.put("handler.mustache", "_handler.py");
+    //this.apiTemplateFiles.put("event_settings.mustache", "_settings.py");
   }
 
   protected String packagePath() {
