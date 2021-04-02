@@ -1,6 +1,5 @@
 package com.halo.codegen;
 
-import org.openapitools.codegen.CodegenConfig;
 import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.SpringCodegen;
 import org.slf4j.Logger;

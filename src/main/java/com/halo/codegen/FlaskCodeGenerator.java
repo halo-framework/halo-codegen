@@ -1,11 +1,10 @@
 package com.halo.codegen;
 
-import org.openapitools.codegen.*;
+import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.AbstractPythonConnexionServerCodegen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
 import java.io.File;
 
 public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
