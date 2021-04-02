@@ -77,7 +77,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     bian_response = boundary.execute(bian_request)
 
-    api_response = SysUtil.process_response_for_client(bian_response,request.method,{{#returnType}}{{.}}{{/returnType}}{{^returnType}}None{{/returnType}})
+    api_response = SysUtil.process_response_for_client(bian_response,request.method)
 
     headers = BianUtil.get_headers(api_response)
 
