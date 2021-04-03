@@ -6,5 +6,6 @@
   "groupId": "tester",
   "artifactId": "halo-springaxon-codegenerator",
 
-  "useTags": "true"
+  "useTags": "true",
+  "delegatePattern": "true"
 }

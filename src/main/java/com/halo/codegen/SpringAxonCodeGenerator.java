@@ -93,7 +93,7 @@ public class SpringAxonCodeGenerator extends SpringCodegen {
      * will use the resource stream to attempt to read the templates.
      */
     // added
-    this.apiTemplateFiles.put("handler.mustache", "_handler.java");
+    this.apiTemplateFiles.put("handler.mustache", "Handler.java");
     this.apiTemplateFiles.put("event_settings.mustache", "_settings.json");
   }
 
