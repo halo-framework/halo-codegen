@@ -8,8 +8,9 @@ return CompletableFuture.supplyAsync(()-> {
 {{#async}}    {{/async}}            {{/jdk8}}for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
     {{/-first}}
 {{#async}}        {{/async}}{{^async}}{{#jdk8}}    {{/jdk8}}{{/async}}            if (mediaType.isCompatibleWith(MediaType.valueOf("{{{contentType}}}"))) {
-{{#async}}        {{/async}}{{^async}}{{#jdk8}}    {{/jdk8}}{{/async}}                String exampleString = {{>exampleString}};
-{{#async}}        {{/async}}{{^async}}{{#jdk8}}    {{/jdk8}}{{/async}}                ApiUtil.setExampleResponse(request, "{{{contentType}}}", exampleString);
+{{#async}}        {{/async}}{{^async}}{{#jdk8}}    {{/jdk8}}{{/async}}                //String exampleString = {{>exampleString}};
+{{#async}}        {{/async}}{{^async}}{{#jdk8}}    {{/jdk8}}{{/async}}                //ApiUtil.setExampleResponse(request, "{{{contentType}}}", exampleString);
+    {{#async}}        {{/async}}{{^async}}{{#jdk8}}    {{/jdk8}}{{/async}}                ApiUtil.setExampleResponse(request, "{{{contentType}}}", exampleString);
 {{#async}}        {{/async}}{{^async}}{{#jdk8}}    {{/jdk8}}{{/async}}                break;
 {{#async}}        {{/async}}{{^async}}{{#jdk8}}    {{/jdk8}}{{/async}}            }
     {{#-last}}

@@ -7,5 +7,5 @@
   "artifactId": "halo-springaxon-codegenerator",
 
   "useTags": "true",
-  "delegatePattern": "true"
+  "virtualService": "true"
 }
