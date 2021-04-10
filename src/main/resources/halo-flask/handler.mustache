@@ -6,8 +6,8 @@
 {{/supportPython2}}
 
 import connexion
-
-{{#imports}}{{import}}  # noqa: E501
+{{#imports}}
+{{import}}  # noqa: E501
 {{/imports}}
 from {{packageName}} import util
 {{#operations}}
