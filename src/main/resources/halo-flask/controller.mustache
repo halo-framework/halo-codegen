@@ -8,7 +8,8 @@ from halo_bian.bian.util import BianUtil
 from halo_bian.bian.app.context import BianContext
 from halo_app.entrypoints import client_util
 	
-{{#imports}}{{import}}  # noqa: E501
+{{#imports}}
+{{import}}  # noqa: E501
 {{/imports}}
 from {{packageName}} import util
 from {{packageName}}.app.utilx import get_flask_filters
