@@ -79,9 +79,14 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     api_response = SysUtil.process_response_for_client(bian_response,request.method)
 
+    if api_response.success:
+        payload = api_response.payload
+    else:
+        payload = api_response.error
+
     headers = BianUtil.get_headers(api_response)
 
-    return jsonify(api_response.payload), api_response.code, headers
+    return jsonify(payload), api_response.code, headers
 
 {{/operation}}
 {{/operations}}
