@@ -372,8 +372,7 @@ class Config(object):
     API_CONFIG = None
     API_SETTINGS = ENV_NAME + '_api_settings.json'
 
-    file_dir = os.path.dirname(__file__)
-    file_path = os.path.join(file_dir,'..','..','env','api', API_SETTINGS)
+    file_path = os.path.join(BASE_DIR,'..','..','env','api', API_SETTINGS)
     if os.path.exists(file_path):
         with open(file_path, 'r') as fi:
             API_CONFIG = json.load(fi)
@@ -394,8 +393,7 @@ class Config(object):
     BUSINESS_EVENT_MAP = None
     HANDLER_MAP = {}
     EVENT_SETTINGS = ENV_NAME + '_event_settings.json'
-    file_dir = os.path.dirname(__file__)
-    dir_path = os.path.join(file_dir,'..','..','..','env','handler')
+    dir_path = os.path.join(BASE_DIR,'..','..','env','handler')
     import ast
     for file in os.listdir(dir_path):
         if file.endswith(".json"):
@@ -412,7 +410,7 @@ class Config(object):
                         for action in val:
                             item = val[action]
                             if item["type"] != BusinessEventCategory.EMPTY.value and item["type"] != '':
-                                file_path_data = os.path.join(file_dir, '..', '..','..', 'env', 'config', item['url'])
+                                file_path_data = os.path.join(BASE_DIR, '..','..', 'env', 'config', item['url'])
                                 try:
                                     with open(file_path_data, 'r') as fx:
                                          data = json.load(fx)
@@ -427,8 +425,7 @@ class Config(object):
         print("no event config files")
 
     MAPPING = None
-    file_dir = os.path.dirname(__file__)
-    file_path = os.path.join(file_dir,'..','..','..', 'env','config','data_mapping.json')
+    file_path = os.path.join(BASE_DIR,'..','..', 'env','config','data_mapping.json')
     try:
         with open(file_path, 'r') as fi:
             MAPPING = json.load(fi)
