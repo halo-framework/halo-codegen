@@ -358,7 +358,7 @@ class Config(object):
     # uow setting
     UOW_MAPPING = None
     UOW_SETTINGS = ENV_NAME + '_uow_settings.json'
-    file_path = os.path.join(BASE_DIR, '..', 'env', 'config', UOW_SETTINGS)
+    file_path = os.path.join(BASE_DIR, '..','..', 'env', 'config', UOW_SETTINGS)
     if os.path.exists(file_path):
         with open(file_path, 'r') as fi:
             UOW_MAPPING = json.load(fi)
