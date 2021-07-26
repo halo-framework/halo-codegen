@@ -5,7 +5,7 @@
     <artifactId>halo-codegen-openapi-generator</artifactId>
     <packaging>jar</packaging>
     <name>halo-codegen-openapi-generator</name>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <build>
         <plugins>
             <plugin>
@@ -121,7 +121,7 @@
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <openapi-generator-version>5.0.0-beta2</openapi-generator-version>
+        <openapi-generator-version>5.2.0</openapi-generator-version>
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.8.1</junit-version>
     </properties>
