@@ -8,7 +8,7 @@ servers:
 security:
 - apiKeyHeader: []
 paths:
-  /current-account/activation:
+  /current-account/activationx:
     post:
       tags:
       - activate

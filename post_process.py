@@ -6,6 +6,8 @@ import shutil
 import time
 import datetime
 import traceback
+import json
+import re
 
 file_path=sys.argv[1]
 block_path=os.environ["RTRV_BLOCK"]
@@ -98,8 +100,12 @@ try:
         with open(source_file, 'r') as fi:
             txt = fi.read()
         txt1 = txt.replace(".controllers.",".entrypoints.rest.controllers.")
+        #for matchedtext in re.findall(r'(requestBody)(.*)(ref)', txt1):
+        #    txt1 = txt1.replace(matchedtext,"xxx")
         with open(source_file, 'w') as fi:
-                fi.write(txt1)
+            fi.write(txt1)
+        #new
+
 except Exception as e:
     file1.write(sttime+"ex_error:"+str(e)+"\n")
     exc_type, exc_value, exc_traceback = sys.exc_info()
