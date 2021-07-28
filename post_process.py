@@ -99,7 +99,7 @@ try:
         source_file = os.path.join(target_dir,"openapi.yaml")
         with open(source_file, 'r') as fi:
             txt = fi.read()
-        txt1 = txt.replace(".controllers.",".entrypoints.rest.controllers.")
+            txt1 = txt.replace(".controllers.",".entrypoints.rest.controllers.")
         #for matchedtext in re.findall(r'(requestBody)(.*)(ref)', txt1):
         #    txt1 = txt1.replace(matchedtext,"xxx")
         with open(source_file, 'w') as fi:
