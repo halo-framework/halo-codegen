@@ -145,7 +145,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
     //added in domain/services
     this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.domainServicesPackage, "__init__.py"));
     this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.domainModelPackage, "__init__.py"));
-    this.supportingFiles.add(new SupportingFile("model.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.domainModelPackage, "model.py"));
+    this.supportingFiles.add(new SupportingFile("domain_model.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.domainModelPackage, "model.py"));
     //added in infra/apis
     this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.infraPackage + File.separatorChar + this.apisPackage, "apis.py"));
     //added in app
