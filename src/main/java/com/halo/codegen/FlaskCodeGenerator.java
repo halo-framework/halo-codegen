@@ -34,7 +34,8 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
   private String handlersPackage = "handlers";
   private String dtoPackage = "dto";
   //in domain
-  private String servicesPackage = "services";
+  private String domainServicesPackage = "services";
+  private String domainModelPackage = "model";
   //model package
   //in infra
   private String apisPackage = "apis";
@@ -142,8 +143,9 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
     //added in app/dto
     this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.dtoPackage, "__init__.py"));
     //added in domain/services
-    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.servicesPackage, "__init__.py"));
-    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.modelPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.domainServicesPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.domainModelPackage, "__init__.py"));
+    this.supportingFiles.add(new SupportingFile("model.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.domainModelPackage, "model.py"));
     //added in infra/apis
     this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.infraPackage + File.separatorChar + this.apisPackage, "apis.py"));
     //added in app
