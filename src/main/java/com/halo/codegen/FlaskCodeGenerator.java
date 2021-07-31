@@ -112,6 +112,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
     this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "init.txt"));
     this.supportingFiles.add(new SupportingFile("startup_props.mustache", this.envDir + File.separatorChar + this.envConfigDir, "startup_props.json"));
     this.supportingFiles.add(new SupportingFile("data_mapping.mustache", this.envDir + File.separatorChar + this.envConfigDir, "data_mapping.json"));
+    this.supportingFiles.add(new SupportingFile("loc_uow_settings.mustache", this.envDir + File.separatorChar + this.envConfigDir, "loc_uow_settings.json"));
     this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envHandlerDir, "init.txt"));
     //added in base
     this.supportingFiles.add(new SupportingFile("aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));

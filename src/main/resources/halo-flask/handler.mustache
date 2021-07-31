@@ -6,6 +6,9 @@
 {{/supportPython2}}
 
 import connexion
+from typing import Tuple, Dict
+from halo_app.app.request import HaloQueryRequest
+
 {{#imports}}
 {{import}}  # noqa: E501
 {{/imports}}
@@ -39,6 +42,11 @@ from halo_bian.bian.bian import ActionTerms
 
 class {{classname}}Handler_{{operationId}}(AbsBianCommandHandler):
     bian_action = ActionTerms.{{#lambda.uppercase}}{{tags.0.name}}{{/lambda.uppercase}}
+
+    #def set_query_data(self,halo_query_request: HaloQueryRequest)->Tuple[str,Dict]:
+    #    sql_query = ""
+    #    params = {}
+    #    return sql_query,params
 
 {{/operation}}
 
