@@ -94,6 +94,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
     // added
     this.apiTemplateFiles.put("handler.mustache", "_handler.py");
     this.apiTemplateFiles.put("event_settings.mustache", "_settings.py");
+    this.apiTemplateFiles.put("domain_model.mustache", "_model.py");
   }
 
   protected void addSupportingFiles() {

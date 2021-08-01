@@ -30,6 +30,22 @@ try:
             txt1 = txt.replace("#replace_block",block)
         with open(file_path, 'w') as fo:
             fo.write(txt1)
+    if file_path.find("_controller_model.py") > 0:
+        if file_path.find("retrieve_controller_model.py") < 0:
+            target_dir = os.path.join(parent_dir,"domain")
+            if not os.path.exists(target_dir):
+                os.mkdir(target_dir)
+            target_dir = os.path.join(target_dir,"model")
+            if not os.path.exists(target_dir):
+                os.mkdir(target_dir)
+            new_name = file_name.replace("_controller_model.py","_model.py")
+            new_path = os.path.join(target_dir,new_name)
+            try:
+                #os.rename(file_path, new_path)
+                shutil.move(file_path, new_path)
+            except Exception as e:
+                file1.write(sttime+"error:"+str(e)+"\n")
+                pass
     if file_path.find("controller_handler") > 0:
         file1.write(sttime+"handler:"+file_path+"\n")
         target_dir = os.path.join(parent_dir,"app")
