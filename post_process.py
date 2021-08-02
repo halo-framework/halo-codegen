@@ -38,6 +38,19 @@ try:
             target_dir = os.path.join(target_dir,"model")
             if not os.path.exists(target_dir):
                 os.mkdir(target_dir)
+            with open(file_path, 'r') as fi:
+                txt = fi.read()
+                start = txt.index( "[[" ) + len( "[[" )
+                end = txt.index( "]]", start )
+                z = txt[start:end]
+                nza = z.split('_', 1)[1]
+                nzb = nza.split('_')
+                nz = ""
+                for i in nzb:
+                    nz = nz+i.capitalize()
+                txt1 = txt.replace("[["+z+"]]",nz)
+            with open(file_path, 'w') as fo:
+                fo.write(txt1)
             new_name = file_name.replace("_controller_model.py","_model.py")
             new_path = os.path.join(target_dir,new_name)
             try:
@@ -46,6 +59,11 @@ try:
             except Exception as e:
                 file1.write(sttime+"error:"+str(e)+"\n")
                 pass
+        else:
+            try:
+                os.remove(file_path)
+            except OSError as e:  ## if failed, report it back to the user ##
+                print ("Error: %s - %s." % (e.filename, e.strerror))
     if file_path.find("controller_handler") > 0:
         file1.write(sttime+"handler:"+file_path+"\n")
         target_dir = os.path.join(parent_dir,"app")
