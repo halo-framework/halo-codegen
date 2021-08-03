@@ -21,7 +21,7 @@ from halo_app.domain.event import AbsHaloDomainEvent
 
 {{#operation}}
 
-class [[{{operationId}}]](AbsHaloAggregateRoot,XXXX):
+class [[{{operationId}}]](AbsHaloAggregateRoot):
     def __init__(self, id: str):
         super().__init__(id)
         self.events = []
