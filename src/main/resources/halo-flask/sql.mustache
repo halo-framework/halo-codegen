@@ -1,0 +1,26 @@
+{{#supportPython2}}
+#!/usr/bin/env python
+{{/supportPython2}}
+{{^supportPython2}}
+#!/usr/bin/env python3
+{{/supportPython2}}
+
+import connexion
+from typing import Tuple, Dict
+from halo_app.app.request import HaloQueryRequest
+
+{{#imports}}
+{{import}}  # noqa: E501
+{{/imports}}
+from {{packageName}} import util
+{{#operations}}
+
+from halo_app.app.context import HaloContext
+
+SQL_DICT = {
+{{#operation}}
+    "{{operationId}}" : "{{#notes}}{{.}}{{/notes}}"{{^-last}},{{/-last}}
+{{/operation}}
+}
+{{/operations}}
+

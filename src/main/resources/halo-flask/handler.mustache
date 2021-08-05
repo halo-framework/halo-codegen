@@ -8,14 +8,15 @@
 import connexion
 from typing import Tuple, Dict
 from halo_app.app.request import HaloQueryRequest
-
+from halo_bian.bian.app.handler import AbsBianCommandHandler
+from halo_bian.bian.bian import ActionTerms
 {{#imports}}
 {{import}}  # noqa: E501
 {{/imports}}
 from {{packageName}} import util
+from {{packageName}}.infra.sql.retrieve_sql import SQL_DICT
 {{#operations}}
-from halo_bian.bian.app.handler import AbsBianCommandHandler
-from halo_bian.bian.bian import ActionTerms
+
 
 """
     # 1. get api definition to access the BANK API  - url + vars dict
@@ -44,7 +45,7 @@ class {{classname}}Handler_{{operationId}}(AbsBianCommandHandler):
     bian_action = ActionTerms.{{#lambda.uppercase}}{{tags.0.name}}{{/lambda.uppercase}}
 
     #def set_query_data(self,halo_query_request: HaloQueryRequest)->Tuple[str,Dict]:
-    #    sql_query = ""
+    #    sql_query = SQL_DICT.get(halo_query_request.usecase_id)
     #    params = {}
     #    return sql_query,params
 

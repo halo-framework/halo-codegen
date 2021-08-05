@@ -64,6 +64,27 @@ try:
                 os.remove(file_path)
             except OSError as e:  ## if failed, report it back to the user ##
                 print ("Error: %s - %s." % (e.filename, e.strerror))
+    if file_path.find("_controller_sql.py") > 0:
+        if file_path.find("retrieve_controller_sql.py") >= 0:
+            target_dir = os.path.join(parent_dir,"infra")
+            if not os.path.exists(target_dir):
+                os.mkdir(target_dir)
+            target_dir = os.path.join(target_dir,"sql")
+            if not os.path.exists(target_dir):
+                os.mkdir(target_dir)
+            new_name = file_name.replace("_controller_sql.py","_sql.py")
+            new_path = os.path.join(target_dir,new_name)
+            try:
+                #os.rename(file_path, new_path)
+                shutil.move(file_path, new_path)
+            except Exception as e:
+                file1.write(sttime+"error:"+str(e)+"\n")
+                pass
+        else:
+            try:
+                os.remove(file_path)
+            except OSError as e:  ## if failed, report it back to the user ##
+                print ("Error: %s - %s." % (e.filename, e.strerror))
     if file_path.find("controller_handler") > 0:
         file1.write(sttime+"handler:"+file_path+"\n")
         target_dir = os.path.join(parent_dir,"app")
