@@ -1,0 +1,103 @@
+{
+    "service": "halo-current-account",
+    "frameworkVersion": ">=1.1.0 <2.0.0",
+    "provider": {
+        "name": "aws",
+        "runtime": "python3.7",
+        "stage": "yor-dev",
+        "region": "us-east-1",
+        "profile": "default",
+        "iamRoleStatements": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:DescribeParameters"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:GetParameters"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:*"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:GetParametersByPath"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:GetParametersByPath"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:PutParameter"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "ssm:PutParameter"
+                ],
+                "Resource": "*"
+            }
+        ],
+        "environment": {
+            "HALO_STAGE": "yor-dev",
+            "HALO_TYPE": "dev",
+            "HALO_FUNC_NAME": "halo_current_account",
+            "HALO_APP_NAME": "bian_service_domains"
+        },
+        "tags": {
+            "tag": "bian_service_domains"
+        }
+    },
+    "plugins": [
+        "serverless-python-requirements",
+        "serverless-wsgi"
+    ],
+    "custom": {
+        "wsgi": {
+            "app": "app.app",
+            "packRequirements": false
+        },
+        "pythonRequirements": {
+            "dockerizePip": "non-linux"
+        }
+    },
+    "package": {
+        "exclude": [
+            "node_modules/**",
+            "venv/**"
+        ]
+    },
+    "functions": {
+        "halo_current_account": {
+            "handler": "wsgi_handler.handler",
+            "events": [
+                {
+                    "http": "ANY /"
+                },
+                {
+                    "http": "ANY {proxy+}"
+                }
+            ]
+        }
+    }
+}

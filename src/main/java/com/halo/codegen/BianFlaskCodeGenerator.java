@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
-public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
-  private static final Logger LOGGER = LoggerFactory.getLogger(FlaskCodeGenerator.class);
+public class BianFlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
+  private static final Logger LOGGER = LoggerFactory.getLogger(BianFlaskCodeGenerator.class);
 
   protected String apiVersion = "1.0.0";
-  protected static final String apiName = "halo-flask";
+  protected static final String apiName = "bian-flask";
 
   //json config dirs
   private String envDir = "env";
@@ -65,7 +65,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
   /**
    * Configures a friendly name for the generator.  This will be used by the generator
    * to select the library with the -g flag.
-   * 
+   *
    * @return the friendly name for the generator
    */
   @Override
@@ -76,7 +76,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
   /**
    * Returns human-friendly help for the generator.  Provide the consumer with help
    * tips, parameters here
-   * 
+   *
    * @return A string value for the help message
    */
   @Override
@@ -84,7 +84,7 @@ public class FlaskCodeGenerator extends AbstractPythonConnexionServerCodegen {
     return "Generates a "+apiName+" client library.";
   }
 
-  public FlaskCodeGenerator() {
+  public BianFlaskCodeGenerator() {
     super(apiName, false);
      // the extension for each file to write
 
