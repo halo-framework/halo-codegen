@@ -73,8 +73,16 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     :rtype: {{#returnType}}{{.}}{{/returnType}}{{^returnType}}None{{/returnType}}
     """
-
-    #replace_block
+    try:
+        varsx = BianUtil.get_bian_vars(vars())
+    except Exception as e:
+        error_code = 400
+        payload = {"error": {"error_code": error_code, "error_message": e.__str__(),
+            "error_detail": 'filter format error',
+            "data": e.__cause__,
+            "trace_id": request.headers.get(BianContext.CORRELATION)}
+            }
+        return jsonify(payload), error_code
 
     bian_context = client_util.get_halo_context(request.headers,request)
 
@@ -82,7 +90,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
 
     bus:IBus = SysUtil.get_bus()
 
-    bian_request = BianUtil.create_bian_request(bian_context,method_id,vars())
+    bian_request = BianUtil.create_bian_request(bian_context,method_id,varsx)
 
     bian_response = bus.execute(bian_request)
 

@@ -1,3 +1,41 @@
+    varsx = {}
+
+    if 'collection_filter' in vars() or 'queryparams' in vars():
+        try:
+            if 'collection_filter' in vars():
+                item = vars()['collection_filter']
+                if item:
+                    collection_filter = get_flask_filters(vars()['collection_filter'])
+                    varsx['collection_filter'] = collection_filter
+            else:
+                item = vars()['queryparams']
+                if item:
+                    queryparams = get_flask_filters(vars()['queryparams'])
+                    varsx['queryparams'] = queryparams
+        except Exception as e:
+            error_code = 400
+            payload = {"error": {"error_code": error_code, "error_message": e.__str__(),
+                "error_detail": 'filter format error',
+                "data": item,
+                "trace_id": request.headers.get(BianContext.CORRELATION)}
+            }
+            return jsonify(payload), error_code
+
+    if 'sd_reference_id' in vars():
+        varsx['sd_reference_id'] = vars()['sd_reference_id']
+    if 'cr_reference_id' in vars():
+        varsx['cr_reference_id'] = vars()['cr_reference_id']
+    if 'bq_reference_id' in vars():
+        varsx['bq_reference_id'] = vars()['bq_reference_id']
+    if 'behavior-qualifier' in vars():
+        varsx['behavior-qualifier'] = vars()['behavior-qualifier']
+    if 'body' in vars():
+        varsx['body'] = vars()['body']
+
+
+
+
+
 if 'collection_filter' in vars() or 'queryparams' in vars():
         try:
             if 'collection_filter' in vars():
