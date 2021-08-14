@@ -1,0 +1,8 @@
+{
+  "packageName": "tester",
+  "basePackage": "tester",
+  "apiPackage": "ui.rest.controllers",
+  "modelPackage": "app.dto",
+  "groupId": "tester",
+  "artifactId": "bian-flask-codegenerator"
+}
