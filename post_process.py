@@ -30,12 +30,18 @@ try:
             txt1 = txt.replace("#replace_block",block)
         with open(file_path, 'w') as fo:
             fo.write(txt1)
-    if file_path.find("_controller_model.py") > 0:
-        if file_path.find("retrieve_controller_model.py") < 0:
-            target_dir = os.path.join(parent_dir,"domain")
+    if file_path.find("_controller_model.py") > 0 or file_path.find("_controller_repository.py") > 0:
+        if file_path.find("_controller_model.py") > 0:
+            fdir = "domain"
+            sdir = "model"
+        else:
+            fdir = "infra"
+            sdir = "repository"
+        if file_path.find("retrieve_controller_") < 0:
+            target_dir = os.path.join(parent_dir,fdir)
             if not os.path.exists(target_dir):
                 os.mkdir(target_dir)
-            target_dir = os.path.join(target_dir,"model")
+            target_dir = os.path.join(target_dir,sdir)
             if not os.path.exists(target_dir):
                 os.mkdir(target_dir)
             with open(file_path, 'r') as fi:
@@ -51,7 +57,10 @@ try:
                 txt1 = txt.replace("[["+z+"]]",nz)
             with open(file_path, 'w') as fo:
                 fo.write(txt1)
-            new_name = file_name.replace("_controller_model.py","_model.py")
+            if file_path.find("_controller_model.py") > 0:
+                new_name = file_name.replace("_controller_model.py","_model.py")
+            else:
+                new_name = file_name.replace("_controller_repository.py","_repository.py")
             new_path = os.path.join(target_dir,new_name)
             try:
                 #os.rename(file_path, new_path)
