@@ -352,6 +352,7 @@ class Config(object):
     print('SSM_TYPE='+SSM_TYPE)
 
     file_path = os.path.join(BASE_DIR, 'schema', "saga_schema.json")
+    # @TODO load conf data for saga managment
     with open(file_path) as f1:
         SAGA_SCHEMA = json.load(f1)
 
@@ -459,7 +460,8 @@ class Config(object):
 
     ASYNC_MODE = False
     DEPENDENCIES = {} # { "sample_repo":"path to class code"}
-    REDIS_URI = get_redis_host_and_port()
+    # @TODO enable if RADIS implemented
+    REDIS_URI = None # get_redis_host_and_port()
     HANDLER_TARGET = "handler_target"
     METHOD_HEADERS = {} # { "method_id":["var1","var2"]}
     COMMAND_ONLY = False
