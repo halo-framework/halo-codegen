@@ -16,10 +16,10 @@ from {{packageName}} import util
 {{#operations}}
 from halo_app.infra.sql_repository import SqlAlchemyRepository
 from halo_app.infra.sql_uow import SqlAlchemyUnitOfWork
-from {{packageName}}.domain.model.??? import [[{{operationId}}]]
-
 
 {{#operation}}
+#@todo fix the import for the aggregate
+from {{packageName}}.domain.model.??? import [[{{operationId}}]]
 
 class [[{{operationId}}]]Repository(SqlAlchemyRepository):
     def get_type(self) ->type:
