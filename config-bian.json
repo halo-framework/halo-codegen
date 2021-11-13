@@ -3,6 +3,7 @@
   "basePackage": "tester",
   "apiPackage": "ui.rest.controllers",
   "modelPackage": "app.dto",
+  "templateDir": "C:\\dev\\projects\\halo\\halo-codegen\\src\\main\\resources\\bian-flask",
   "groupId": "tester",
   "artifactId": "bian-flask-codegenerator"
 }
