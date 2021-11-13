@@ -109,14 +109,30 @@ public class SpringCodeGenerator extends SpringCodegen {
     this.supportingFiles.add(new SupportingFile("sls_fargate_settings.mustache", this.serverlessDir, "sls_fargate_settings.json"));
     this.supportingFiles.add(new SupportingFile("sls_lambda_settings.mustache", this.serverlessDir, "sls_lambda_settings.json"));
     //added ui
+    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage+ File.separatorChar + this.restPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage+ File.separatorChar + this.cliPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("__init__config.mustache", this.packagePath() + File.separatorChar + this.uiPackage + File.separatorChar + this.configPackage, "__init__.txt"));
     //added app
+    this.supportingFiles.add(new SupportingFile("__init__app_dir.mustache", this.packagePath() + File.separatorChar + this.appPackage, "__init__.txt"));
     // added domain
+    this.supportingFiles.add(new SupportingFile("__init__domain.mustache", this.packagePath() + File.separatorChar + this.domainPackage, "__init__.txt"));
     //added infra
+    this.supportingFiles.add(new SupportingFile("__init__infra.mustache", this.packagePath() + File.separatorChar + this.infraPackage, "__init__.txt"));
     //added in app/services
+    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.handlersPackage, "__init__.txt"));
     //added in app/dto
+    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.dtoPackage, "__init__.txt"));
     //added in domain/services
+    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.servicesPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.modelPackage, "__init__.txt"));
     //added in infra/apis
+    //this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.infraPackage + File.separatorChar + this.apisPackage, "apis.py"));
     //added in app
+    //this.supportingFiles.add(new SupportingFile("mixin_err_msg.mustache", this.packagePath() + File.separatorChar + this.appPackage, "err_msg.py"));
+    //this.supportingFiles.add(new SupportingFile("mixin_hooks.mustache", this.packagePath() + File.separatorChar + this.appPackage, "hooks.py"));
+    //this.supportingFiles.add(new SupportingFile("mixin_handler.mustache", this.packagePath() + File.separatorChar + this.appPackage, "handler.py"));
+    //this.supportingFiles.add(new SupportingFile("utilx.mustache", this.packagePath() + File.separatorChar + this.appPackage, "utilx.py"));
 
     //-p com.my.company.codegen
     //this.testPackage = this.packageName + "." + this.testPackage;
