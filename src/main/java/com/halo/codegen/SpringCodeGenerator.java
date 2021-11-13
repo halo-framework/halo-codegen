@@ -79,5 +79,48 @@ public class SpringCodeGenerator extends SpringCodegen {
     this.apiTemplateFiles.put("event_settings.mustache", "_settings.json");
   }
 
+  protected String packagePath() {
+    return  sourceFolder;
+  }
+
+  protected void addSupportingFiles() {
+    //original supporting files
+    this.supportingFiles.add(new SupportingFile("gitignore.mustache", "", ".gitignore"));
+    //this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", "", "Dockerfile"));
+    this.supportingFiles.add(new SupportingFile("dockerignore.mustache", "", ".dockerignore"));
+     this.supportingFiles.add(new SupportingFile("tox.mustache", "", "tox.ini"));
+    this.supportingFiles.add(new SupportingFile("git_push.sh.mustache", "", "git_push.sh"));
+    this.supportingFiles.add(new SupportingFile("travis.mustache", "", ".travis.yml"));
+     // added in env
+    this.supportingFiles.add(new SupportingFile(".env.loc.mustache", this.envDir , ".env.loc"));
+    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "init.txt"));
+    this.supportingFiles.add(new SupportingFile("startup_props.mustache", this.envDir + File.separatorChar + this.envConfigDir, "startup_props.json"));
+    this.supportingFiles.add(new SupportingFile("data_mapping.mustache", this.envDir + File.separatorChar + this.envConfigDir, "data_mapping.json"));
+    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envHandlerDir, "init.txt"));
+    //added in base
+    this.supportingFiles.add(new SupportingFile("aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));
+    this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", this.dockerDir, "Dockerfile"));
+    this.supportingFiles.add(new SupportingFile("nginx.mustache", this.dockerDir, "nginx.conf"));
+    this.supportingFiles.add(new SupportingFile("start.mustache", this.dockerDir, "start.sh"));
+    this.supportingFiles.add(new SupportingFile("uwsgi.mustache", this.dockerDir, "uwsgi.ini"));
+    //added in serverless
+    this.supportingFiles.add(new SupportingFile("aws_ami_config.mustache", this.serverlessDir, "aws_ami_config.txt"));
+    this.supportingFiles.add(new SupportingFile("buildspec.mustache", this.serverlessDir, "buildspec.yml"));
+    this.supportingFiles.add(new SupportingFile("sls_fargate_settings.mustache", this.serverlessDir, "sls_fargate_settings.json"));
+    this.supportingFiles.add(new SupportingFile("sls_lambda_settings.mustache", this.serverlessDir, "sls_lambda_settings.json"));
+    //added ui
+    //added app
+    // added domain
+    //added infra
+    //added in app/services
+    //added in app/dto
+    //added in domain/services
+    //added in infra/apis
+    //added in app
+
+    //-p com.my.company.codegen
+    //this.testPackage = this.packageName + "." + this.testPackage;
+  }
+
 
 }
