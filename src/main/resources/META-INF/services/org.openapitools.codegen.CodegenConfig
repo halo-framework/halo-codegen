@@ -2,3 +2,4 @@ com.halo.codegen.FlaskCodeGenerator
 com.halo.codegen.BianFlaskCodeGenerator
 com.halo.codegen.FastapiCodeGenerator
 com.halo.codegen.SpringAxonCodeGenerator
+com.halo.codegen.SpringCodeGenerator

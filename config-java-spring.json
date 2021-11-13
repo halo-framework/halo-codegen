@@ -1,0 +1,11 @@
+{
+  "packageName": "tester",
+  "basePackage": "tester",
+  "apiPackage": "tester.ui.rest.controllers",
+  "modelPackage": "tester.app.dto",
+  "groupId": "tester",
+  "artifactId": "halo-spring-codegenerator",
+  "templateDir": "C:\\dev\\projects\\halo\\halo-codegen\\src\\main\\resources\\halo-spring",
+  "useTags": "true",
+  "virtualService": "true"
+}

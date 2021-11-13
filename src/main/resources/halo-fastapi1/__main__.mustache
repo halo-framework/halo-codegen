@@ -1,0 +1,168 @@
+{{#supportPython2}}
+#!/usr/bin/env python
+{{/supportPython2}}
+{{^supportPython2}}
+#!/usr/bin/env python3
+{{/supportPython2}}
+
+import os
+from fastapi import FastAPI,Depends
+from starlette.responses import RedirectResponse
+from starlette.staticfiles import StaticFiles
+import asyncio
+import logging
+
+from fastapi_utils.timing import add_timing_middleware, record_timing
+
+from halo_app.apis import load_api_config
+from halo_app.app.viewsx import PerfLinkX,TestLinkX,HealthLinkX,InfoLinkX
+from halo_app.ssm import set_app_param_config,set_host_param_config,get_app_param_config
+from halo_app.app.globals import load_global_data
+from halo_app.base_util import BaseUtil
+from fastapi import APIRouter
+from .settings import get_api_settings
+settings = get_api_settings()
+
+from halo_app.const import LOC,DEV,TST,PRD
+
+if 'HALO_STAGE' in os.environ:
+    STAGE = os.environ['HALO_STAGE']
+else:
+    STAGE = LOC
+
+router = APIRouter()
+
+def get_api_router():
+    #router.include_router(agents.router, prefix='/api')
+    #router.include_router(companies.router, prefix='/api')
+
+    return router
+
+def create_app() -> FastAPI:
+    api_settings = settings
+
+    server = FastAPI(title=api_settings.project_name, openapi_url=api_settings.openapi_route, debug=api_settings.debug)
+    server.include_router(get_api_router(), prefix=api_settings.api_v1_route)
+
+    @server.get("/", include_in_schema=False)
+    def redirect_to_docs() -> RedirectResponse:
+        return RedirectResponse("/docs")
+
+    @server.on_event("startup")
+    async def connect_to_database() -> None:
+        database = get_database()
+        if not database.is_connected:
+            await database.connect()
+
+    @server.on_event("shutdown")
+    async def shutdown() -> None:
+        database = get_database()
+        if database.is_connected:
+            await database.disconnect()
+
+    static_files_app = StaticFiles(directory=str(api_settings.static_dir))
+    server.mount(path=api_settings.static_mount_path, app=static_files_app, name="static")
+
+    #setup_api(server, api_settings, use_session_middleware=api_settings.use_session_middleware)
+    #setup_openapi_schemas(server)
+    add_timing_middleware(server, exclude="StaticFiles")
+    return server
+
+def create_app()-> Flask:
+    _app = connexion.App(__name__, specification_dir='./openapi/')
+    _app.app.json_encoder = encoder.JSONEncoder
+    with _app.app.app_context():
+        path = "/" + STAGE
+        _app.add_api('openapi.yaml',base_path=path,
+                     arguments={'title': '{{appName}}'},
+                     pythonic_params=True)
+        configure_app(_app.app)
+        setup_app(_app.app)
+        register_halo(_app.app)
+        register_shellcontext(_app.app)
+        register_commands(_app.app)
+
+        URL = 'http://{host}:{port}{url_prefix}/ui/'.format(
+            host=_app.app.config['HOST'],
+            port=_app.app.config['PORT'],
+            url_prefix=path)
+        print('[✔] API documentation (Swagger UI) available at: {}'.format(URL))
+
+        return _app
+
+
+def configure_app(flask_app:Flask):
+    flask_app.config.from_object(f"{{packageName}}.config.Config_{os.getenv('HALO_STAGE', LOC)}")
+
+def setup_app(flask_app:Flask):
+    from {{packageName}}.mixin.mixin_hooks import before_first_request_func,before_request_func,after_request_func,teardown_request_func
+
+    @flask_app.before_first_request
+    def before_first_request():
+        # do something
+        before_first_request_func()
+
+    @flask_app.before_request
+    def before_request():
+        # do something
+        before_request_func()
+
+    @flask_app.after_request
+    def after_request(response):
+        # get the request object somehow
+        return after_request_func(response)
+
+    @flask_app.teardown_request
+    def teardown_request(error=None):
+        # get the request object somehow
+        teardown_request_func(error)
+
+def register_halo(flask_app: Flask):
+    with flask_app.app_context():
+        from halo_app.ssm import set_app_param_config, set_host_param_config
+        from halo_app.apis import load_api_config
+        from halo_app.app.globals import load_global_data
+        from halo_app.base_util import BaseUtil
+        #flask_app.config["SSM_TYPE"] = 'ONPREM'
+        flask_app.config["APP_NAME"] = "abc"
+        flask_app.config["FUNC_NAME"] = "def"
+        if 'SSM_TYPE' in flask_app.config and flask_app.config['SSM_TYPE'] != 'NONE':
+            load_api_config(flask_app.config['ENV_TYPE'], flask_app.config['SSM_TYPE'], flask_app.config['FUNC_NAME'],
+                            flask_app.config['API_CONFIG'])
+            HALO_HOST = BaseUtil.get_host_name()
+            params = {}
+            params["url"] = set_host_param_config(HALO_HOST)
+            set_app_param_config(flask_app.config['SSM_TYPE'], params )
+        if 'INIT_DATA_MAP' in flask_app.config and 'INIT_CLASS_NAME' in flask_app.config:
+            data_map = flask_app.config['INIT_DATA_MAP']
+            class_name = flask_app.config['INIT_CLASS_NAME']
+            load_global_data(class_name, data_map)
+        else:
+            file_dir = os.path.dirname(__file__)
+            PROP_URL = os.path.join(file_dir, '..', 'env', 'config', "startup_props.json")
+            flask_app.config["INIT_CLASS_NAME"] = 'halo_app.bian.app.globals.BianGlobalService'
+            flask_app.config["INIT_DATA_MAP"] = {'INIT_STATE': "Idle", 'PROP_URL': PROP_URL}
+            load_global_data(flask_app.config["INIT_CLASS_NAME"], flask_app.config["INIT_DATA_MAP"])
+
+
+def register_shellcontext(app):
+    """Register shell context objects."""
+    def shell_context():
+        """Shell context objects."""
+        return {
+            'db': db,
+            'User': api.models.User}
+
+    app.shell_context_processor(shell_context)
+
+
+def register_commands(app):
+    """Register Click commands."""
+    app.cli.add_command(commands.test)
+    app.cli.add_command(commands.lint)
+    app.cli.add_command(commands.clean)
+    app.cli.add_command(commands.urls)
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(port=app.app.config["PORT"])

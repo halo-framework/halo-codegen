@@ -1,0 +1,48 @@
+{{#supportPython2}}
+    #!/usr/bin/env python
+{{/supportPython2}}
+{{^supportPython2}}
+    #!/usr/bin/env python3
+{{/supportPython2}}
+
+import connexion
+
+{{#imports}}{{import}}  # noqa: E501
+{{/imports}}
+from {{packageName}} import util
+{{#operations}}
+from halo_app.app.viewsx import AbsBaseLinkX
+from halo_app.bian.app.globals import AbsBianMixin
+from halo_bian.bian.bian import ActionTerms
+
+"""
+    # 1. get api definition to access the BANK API  - url + vars dict
+    back_api = self.set_back_api(halo_request)
+    # 2. array to store the headers required for the API Access
+    back_headers = self.set_api_headers(halo_request,back_api)
+    # 3. Set request params
+    back_vars = self.set_api_vars(halo_request,back_api)
+    # 4. Set request auth
+    back_auth = self.set_api_auth(halo_request,back_api)
+    # 5. Set request data
+    if halo_request.request.method == HTTPChoice.post.value or halo_request.request.method == HTTPChoice.put.value:
+        back_data = self.set_api_data(halo_request,back_api)
+    else:
+        back_data = None
+    # 6. Sending the request to the BANK API with params
+    back_response = self.execute_api(halo_request, back_api, back_vars, back_headers, back_auth,
+    back_data)
+    # 7. extract from Response stored in an object built as per the BANK API Response body JSON Structure
+    back_json = self.extract_json(halo_request,back_api, back_response)
+"""
+
+{{#operation}}
+
+
+class {{classname}}Impl_{{operationId}}(AbsBianMixin,AbsBaseLinkX):
+    bian_action = ActionTerms.{{#lambda.uppercase}}{{tags.0.name}}{{/lambda.uppercase}}
+
+
+{{/operation}}
+{{/operations}}
+
