@@ -1,0 +1,82 @@
+# build your ami
+1. go to https://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html
+2. open the AMI – amzn-ami-hvm-2017.03.1.20170812-x86_64-gp2
+3. launch an instance on ec2
+4.1 sudo yum install python36 #install python 3
+# add nodejs and npm - https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
+4.2 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+4.3 . ~/.nvm/nvm.sh
+4.4 nvm install node
+# add serverless framework
+4.5 npm install -g serverless
+# build python env and flask app
+5. python3 -m venv venv # create virtual environment
+6. . venv/bin/activate # activate environment
+7. pip install -r requirements.txt # copy source pkg, extract to directory and install requirements in venv
+# run flask - referance : https://www.codementor.io/dushyantbgs/deploying-a-flask-application-to-aws-gnva38cf0
+8. fix in service/static/XXX/swagger.json the "basePath" property : add the ENV as prefix to url and in swagger-ui/index.html add ENV as prefix to 'url' param in code
+9. python -m flask run --port PORT_NO --host 0.0.0.0 & # start flask on public net
+10. access your swagger ui : http://IPADDRESS:PORT/loc/static/swagger-ui/index.html # http://3.85.171.246:8080/loc/static/swagger-ui/index.html
+
+
+### if deploy to ENV on lambda
+11. copy serverless/ENV_sls_settings_lambda.json to serverless.json
+12. edit ~/.aws/credentials
+# first time only
+13. sls plugin install -n serverless-python-requirements
+14. sls plugin install -n serverless-wsgi
+15. clean duplicate plugin definition in serverless.json and remove requirements from prod in requirements.txt
+# delpoy
+16. sls deploy
+17. access your swagger ui : http://IPADDRESS:PORT/ENV/static/swagger-ui/index.html
+
+### if deploy to ENV on fargate
+11. copy serverless/ENV_sls_settings_fargate.json to serverless.json
+12. create role ecsTaskExecutionRole : https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
+and add permissions like ssm etc
+# first time only
+13. sls plugin install -n serverless-fargate-plugin
+14. clean duplicate plugin definition in serverless.json
+# delpoy
+16. sls deploy
+17. access your swagger ui : http://IPADDRESS:PORT/ENV/static/swagger-ui/index.html
+
+fixs:
+in case sls deploy has error with API gateway:
+    Remove the http event triggers from every Lambda. If you have any other references to the API Gateway in your serverless.yml then remove those too. This should remove the API Gateway from your Cloud Formation template. You can check by looking at .serverless/cloudformation-template-update-stack.json
+    Run sls deploy. This should remove the API Gateway from your Cloud Formation stack.
+    Undo step 1
+    Run sls deploy to create a new API Gateway.
+
+errors:
+1. fix the K in /halo_current_account/halo_current_account_service/api/models.py
+2. prod in requirements.txt is breaking
+3. "pythonBin" in serverless.json is not good - fixed
+4. service name can not have underscore in serverless.json - fixed
+
+architecture issues:
+1. add grpc/event to api infra(thrift)
+2. webhooks for each biz event
+3. interaction vs integration(sync vs async-eda)
+4. sandbox
+5. bank+country version
+6. orchestration vs choreography
+7. monitoring
+8. admin
+9. security
+10. pass HTTP header for the biz scenario implementation - sync or async for delegation and/or API
+11. finish all the schema files for the different config files
+
+nfr :
+1. Microservices
+2. cloud ready
+3. 12 factor
+4. rest/grpc/event
+5. local persistance/cache
+6. saga
+7. circuit breaker
+8. monitor & admin
+9. biz analytics
+10. web and data security
+
+

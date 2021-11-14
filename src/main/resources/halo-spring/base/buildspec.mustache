@@ -1,0 +1,26 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.7
+  pre_build:
+    commands:
+      - npm install
+      - npm install -g mocha
+      - npm install -g artillery
+      - npm install -g serverless
+      - cp serverless/dev_sls_lambda_settings.json serverless.json
+      - sls plugin install -n serverless-python-requirements
+      - sls plugin install -n serverless-wsgi
+  build:
+    commands:
+      - pip install -r requirements.txt
+      - cp requirementsx.txt requirements.txt
+      - export SERVERLESS_ACCESS_KEY=
+      - sls deploy --stage dev | tee deploy.out
+  post_build:
+    commands:
+      - python flake8
+      - python tests/test_bian.py
+      - npm test
+      - artillery run artillery.yml

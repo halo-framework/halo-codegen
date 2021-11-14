@@ -83,49 +83,50 @@ public class SpringCodeGenerator extends SpringCodegen {
     return  sourceFolder;
   }
 
-  protected void addSupportingFiles() {
+  public void processOpts() {
+    super.processOpts();
     //original supporting files
-    this.supportingFiles.add(new SupportingFile("gitignore.mustache", "", ".gitignore"));
+    this.supportingFiles.add(new SupportingFile("base/gitignore.mustache", "", ".gitignore"));
     //this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", "", "Dockerfile"));
-    this.supportingFiles.add(new SupportingFile("dockerignore.mustache", "", ".dockerignore"));
-     this.supportingFiles.add(new SupportingFile("tox.mustache", "", "tox.ini"));
-    this.supportingFiles.add(new SupportingFile("git_push.sh.mustache", "", "git_push.sh"));
-    this.supportingFiles.add(new SupportingFile("travis.mustache", "", ".travis.yml"));
+    this.supportingFiles.add(new SupportingFile("base/dockerignore.mustache", "", ".dockerignore"));
+    this.supportingFiles.add(new SupportingFile("base/tox.mustache", "", "tox.ini"));
+    this.supportingFiles.add(new SupportingFile("base/git_push.sh.mustache", "", "git_push.sh"));
+    this.supportingFiles.add(new SupportingFile("base/travis.mustache", "", ".travis.yml"));
      // added in env
-    this.supportingFiles.add(new SupportingFile(".env.loc.mustache", this.envDir , ".env.loc"));
-    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "init.txt"));
-    this.supportingFiles.add(new SupportingFile("startup_props.mustache", this.envDir + File.separatorChar + this.envConfigDir, "startup_props.json"));
-    this.supportingFiles.add(new SupportingFile("data_mapping.mustache", this.envDir + File.separatorChar + this.envConfigDir, "data_mapping.json"));
-    this.supportingFiles.add(new SupportingFile("__init__.mustache", this.envDir + File.separatorChar + this.envHandlerDir, "init.txt"));
+    this.supportingFiles.add(new SupportingFile("base/.env.loc.mustache", this.envDir , ".env.loc"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.envDir + File.separatorChar + this.envApiDir, "init.txt"));
+    this.supportingFiles.add(new SupportingFile("base/startup_props.mustache", this.envDir + File.separatorChar + this.envConfigDir, "startup_props.json"));
+    this.supportingFiles.add(new SupportingFile("base/data_mapping.mustache", this.envDir + File.separatorChar + this.envConfigDir, "data_mapping.json"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.envDir + File.separatorChar + this.envHandlerDir, "init.txt"));
     //added in base
-    this.supportingFiles.add(new SupportingFile("aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));
-    this.supportingFiles.add(new SupportingFile("Dockerfile.mustache", this.dockerDir, "Dockerfile"));
-    this.supportingFiles.add(new SupportingFile("nginx.mustache", this.dockerDir, "nginx.conf"));
-    this.supportingFiles.add(new SupportingFile("start.mustache", this.dockerDir, "start.sh"));
-    this.supportingFiles.add(new SupportingFile("uwsgi.mustache", this.dockerDir, "uwsgi.ini"));
+    this.supportingFiles.add(new SupportingFile("base/aws_docker_config.mustache",  this.dockerDir, "aws_docker_config.txt"));
+    this.supportingFiles.add(new SupportingFile("base/Dockerfile.mustache", this.dockerDir, "Dockerfile"));
+    this.supportingFiles.add(new SupportingFile("base/nginx.mustache", this.dockerDir, "nginx.conf"));
+    this.supportingFiles.add(new SupportingFile("base/start.mustache", this.dockerDir, "start.sh"));
+    this.supportingFiles.add(new SupportingFile("base/uwsgi.mustache", this.dockerDir, "uwsgi.ini"));
     //added in serverless
-    this.supportingFiles.add(new SupportingFile("aws_ami_config.mustache", this.serverlessDir, "aws_ami_config.txt"));
-    this.supportingFiles.add(new SupportingFile("buildspec.mustache", this.serverlessDir, "buildspec.yml"));
-    this.supportingFiles.add(new SupportingFile("sls_fargate_settings.mustache", this.serverlessDir, "sls_fargate_settings.json"));
-    this.supportingFiles.add(new SupportingFile("sls_lambda_settings.mustache", this.serverlessDir, "sls_lambda_settings.json"));
+    this.supportingFiles.add(new SupportingFile("base/aws_ami_config.mustache", this.serverlessDir, "aws_ami_config.txt"));
+    this.supportingFiles.add(new SupportingFile("base/buildspec.mustache", this.serverlessDir, "buildspec.yml"));
+    this.supportingFiles.add(new SupportingFile("base/sls_fargate_settings.mustache", this.serverlessDir, "sls_fargate_settings.json"));
+    this.supportingFiles.add(new SupportingFile("base/sls_lambda_settings.mustache", this.serverlessDir, "sls_lambda_settings.json"));
     //added ui
-    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage+ File.separatorChar + this.restPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("__init__ui.mustache", this.packagePath() + File.separatorChar + this.uiPackage+ File.separatorChar + this.cliPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("__init__config.mustache", this.packagePath() + File.separatorChar + this.uiPackage + File.separatorChar + this.configPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.getArtifactId() + File.separatorChar + this.uiPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.getArtifactId() + File.separatorChar + this.uiPackage+ File.separatorChar + this.restPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.getArtifactId() + File.separatorChar + this.uiPackage+ File.separatorChar + this.cliPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.getArtifactId() + File.separatorChar + this.uiPackage + File.separatorChar + this.configPackage, "__init__.txt"));
     //added app
-    this.supportingFiles.add(new SupportingFile("__init__app_dir.mustache", this.packagePath() + File.separatorChar + this.appPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.appPackage, "__init__.txt"));
     // added domain
-    this.supportingFiles.add(new SupportingFile("__init__domain.mustache", this.packagePath() + File.separatorChar + this.domainPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage, "__init__.txt"));
     //added infra
-    this.supportingFiles.add(new SupportingFile("__init__infra.mustache", this.packagePath() + File.separatorChar + this.infraPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.infraPackage, "__init__.txt"));
     //added in app/services
-    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.handlersPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.appPackage + File.separatorChar + this.handlersPackage, "__init__.txt"));
     //added in app/dto
-    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.appPackage + File.separatorChar + this.dtoPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.appPackage + File.separatorChar + this.dtoPackage, "__init__.txt"));
     //added in domain/services
-    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.servicesPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("__init__handlers.mustache", this.packagePath() + File.separatorChar + this.domainPackage + File.separatorChar + this.modelPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage + File.separatorChar + this.servicesPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage + File.separatorChar + this.modelPackage, "__init__.txt"));
     //added in infra/apis
     //this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.infraPackage + File.separatorChar + this.apisPackage, "apis.py"));
     //added in app

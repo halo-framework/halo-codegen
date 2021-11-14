@@ -1,11 +1,10 @@
 {
   "packageName": "tester",
   "basePackage": "tester",
-  "apiPackage": "tester.ui.rest.controllers",
+  "apiPackage": "tester.entrypoints.rest.controllers",
   "modelPackage": "tester.app.dto",
   "groupId": "tester",
-  "artifactId": "halo-spring-codegenerator",
+  "artifactId": "tester",
   "templateDir": "C:\\dev\\projects\\halo\\halo-codegen\\src\\main\\resources\\halo-spring",
-  "useTags": "true",
-  "virtualService": "true"
+  "sourceFolder": "src/main/java/tester"
 }
