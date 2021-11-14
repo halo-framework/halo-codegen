@@ -36,6 +36,7 @@ public class SpringCodeGenerator extends SpringCodegen {
   private String dtoPackage = "dto";
   //in domain
   private String servicesPackage = "services";
+  private String domainModelPackage = "model";
   //model package
   //in infra
   private String apisPackage = "apis";
@@ -126,7 +127,7 @@ public class SpringCodeGenerator extends SpringCodegen {
     this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.appPackage + File.separatorChar + this.dtoPackage, "__init__.txt"));
     //added in domain/services
     this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage + File.separatorChar + this.servicesPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage + File.separatorChar + this.modelPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage + File.separatorChar + this.domainModelPackage, "__init__.txt"));
     //added in infra/apis
     //this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.infraPackage + File.separatorChar + this.apisPackage, "apis.py"));
     //added in app
