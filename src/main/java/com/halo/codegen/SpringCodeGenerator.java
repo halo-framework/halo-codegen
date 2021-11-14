@@ -110,10 +110,10 @@ public class SpringCodeGenerator extends SpringCodegen {
     this.supportingFiles.add(new SupportingFile("base/sls_fargate_settings.mustache", this.serverlessDir, "sls_fargate_settings.json"));
     this.supportingFiles.add(new SupportingFile("base/sls_lambda_settings.mustache", this.serverlessDir, "sls_lambda_settings.json"));
     //added ui
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.getArtifactId() + File.separatorChar + this.uiPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.getArtifactId() + File.separatorChar + this.uiPackage+ File.separatorChar + this.restPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.getArtifactId() + File.separatorChar + this.uiPackage+ File.separatorChar + this.cliPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.getArtifactId() + File.separatorChar + this.uiPackage + File.separatorChar + this.configPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.uiPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.uiPackage+ File.separatorChar + this.restPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.uiPackage+ File.separatorChar + this.cliPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.uiPackage + File.separatorChar + this.configPackage, "__init__.txt"));
     //added app
     this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.appPackage, "__init__.txt"));
     // added domain
