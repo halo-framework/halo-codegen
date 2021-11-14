@@ -111,23 +111,23 @@ public class SpringCodeGenerator extends SpringCodegen {
     this.supportingFiles.add(new SupportingFile("base/sls_fargate_settings.mustache", this.serverlessDir, "sls_fargate_settings.json"));
     this.supportingFiles.add(new SupportingFile("base/sls_lambda_settings.mustache", this.serverlessDir, "sls_lambda_settings.json"));
     //added ui
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder() + File.separatorChar + this.uiPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.uiPackage+ File.separatorChar + this.restPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.uiPackage+ File.separatorChar + this.cliPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.uiPackage + File.separatorChar + this.configPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.basePackage+File.separatorChar+ this.uiPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.basePackage+File.separatorChar+ this.uiPackage+ File.separatorChar + this.restPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.basePackage+File.separatorChar+ this.uiPackage+ File.separatorChar + this.cliPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()  + File.separatorChar + this.basePackage+File.separatorChar+ this.uiPackage + File.separatorChar + this.configPackage, "__init__.txt"));
     //added app
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.appPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.basePackage+File.separatorChar + this.appPackage, "__init__.txt"));
     // added domain
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.basePackage+File.separatorChar+ this.domainPackage, "__init__.txt"));
     //added infra
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.infraPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.basePackage+File.separatorChar+ this.infraPackage, "__init__.txt"));
     //added in app/services
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.appPackage + File.separatorChar + this.handlersPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.basePackage+File.separatorChar+ this.appPackage + File.separatorChar + this.handlersPackage, "__init__.txt"));
     //added in app/dto
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.appPackage + File.separatorChar + this.dtoPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.basePackage+File.separatorChar+ this.appPackage + File.separatorChar + this.dtoPackage, "__init__.txt"));
     //added in domain/services
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage + File.separatorChar + this.servicesPackage, "__init__.txt"));
-    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.domainPackage + File.separatorChar + this.domainModelPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.basePackage+File.separatorChar+ this.domainPackage + File.separatorChar + this.servicesPackage, "__init__.txt"));
+    this.supportingFiles.add(new SupportingFile("base/__init__.mustache", this.getSourceFolder()+File.separatorChar + this.basePackage+File.separatorChar+ this.domainPackage + File.separatorChar + this.domainModelPackage, "__init__.txt"));
     //added in infra/apis
     //this.supportingFiles.add(new SupportingFile("mixin_api.mustache", this.packagePath() + File.separatorChar + this.infraPackage + File.separatorChar + this.apisPackage, "apis.py"));
     //added in app
