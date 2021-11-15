@@ -1,7 +1,7 @@
 {
   "packageName": "tester",
   "basePackage": "tester",
-  "apiPackage": "entrypoints.rest.controllers",
+  "apiPackage": "ui.rest.controllers",
   "modelPackage": "app.dto",
   "templateDir": "C:\\dev\\projects\\halo\\halo-codegen\\src\\main\\resources\\bian-flask",
   "groupId": "tester",
