@@ -20,10 +20,14 @@ file1 = open(log_path, "a+")
 ts = time.time()
 sttime = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H:%M:%S - ')
 file1.write(sttime+"start:"+file_path+"\n")
+block_file_path = os.path.join(block_path,"block.txt")
+block_query_file_path = os.path.join(block_path,"block_query.txt")
+block_command_file_path = os.path.join(block_path,"block_command.txt")
+
 try:
     if file_path.find("retrieve_controller.py") > 0:
         file1.write(sttime+"retrieve_controller:"+file_path+"\n")
-        with open(block_path, 'r') as blockfile:
+        with open(block_file_path, 'r') as blockfile:
             block = blockfile.read()
         with open(file_path, 'r') as fi:
             txt = fi.read()
@@ -114,6 +118,17 @@ try:
             with open(new_path, 'r') as fi:
                 txt = fi.read()
                 txt1 = txt.replace("AbsBianCommandHandler","AbsBianQueryHandler")
+                with open(block_query_file_path, 'r') as blockfile:
+                    block = blockfile.read()
+                    txt1 = txt1.replace("#replace_block",block)
+            with open(new_path, 'w') as fo:
+                fo.write(txt1)
+        else:
+            with open(new_path, 'r') as fi:
+                txt = fi.read()
+                with open(block_command_file_path, 'r') as blockfile:
+                    block = blockfile.read()
+                    txt1 = txt.replace("#replace_block",block)
             with open(new_path, 'w') as fo:
                 fo.write(txt1)
     if file_path.find("service_factory") > 0:

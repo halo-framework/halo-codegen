@@ -1,0 +1,8 @@
+
+    #def handle(self,halo_command_request:HaloCommandRequest,uow:AbsUnitOfWork)->Result:
+    #    with uow:
+    #         item = uow.repository.get(bian_command_request.cr_reference_id)
+    #         entity = self.domain_service.validate(item)
+    #         self.infra_service.send(entity)
+    #         uow.commit()
+    #     return Result.ok({"1":"abc","2":"def"})
