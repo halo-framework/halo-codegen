@@ -41,7 +41,8 @@ try:
         else:
             fdir = "infra"
             sdir = "repository"
-        if file_path.find("retrieve_controller_") < 0:
+        #if file_path.find("retrieve_controller_") < 0:
+        if file_path.find("initiate_controller_") > 0:
             target_dir = os.path.join(parent_dir,fdir)
             if not os.path.exists(target_dir):
                 os.mkdir(target_dir)
@@ -49,7 +50,8 @@ try:
             if not os.path.exists(target_dir):
                 os.mkdir(target_dir)
             with open(file_path, 'r') as fi:
-                txt = fi.read()
+                txtr = fi.read()
+                txt = txtr
                 start = txt.index( "[[" ) + len( "[[" )
                 end = txt.index( "]]", start )
                 z = txt[start:end]
@@ -58,9 +60,9 @@ try:
                 nz = ""
                 for i in nzb:
                     nz = nz+i.capitalize()
-                txt1 = txt.replace("[["+z+"]]",nz)
+                txt = txt.replace("[["+z+"]]",nz)
             with open(file_path, 'w') as fo:
-                fo.write(txt1)
+                fo.write(txt)
             if file_path.find("_controller_model.py") > 0:
                 new_name = file_name.replace("_controller_model.py","_model.py")
             else:
