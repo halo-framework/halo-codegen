@@ -24,6 +24,19 @@ block_file_path = os.path.join(block_path,"block.txt")
 block_query_file_path = os.path.join(block_path,"block_query.txt")
 block_command_file_path = os.path.join(block_path,"block_command.txt")
 
+def flip(txt):
+    i = txt.index( "[[" )
+    start = i + len( "[[" )
+    end = txt.index( "]]", start )
+    z = txt[start:end]
+    nza = z.split('_', 1)[1]
+    nzb = nza.split('_')
+    nz = ""
+    for i in nzb:
+        nz = nz+i.capitalize()
+    txto = txt.replace("[["+z+"]]",nz)
+    return txto
+
 try:
     if file_path.find("retrieve_controller.py") > 0:
         file1.write(sttime+"retrieve_controller:"+file_path+"\n")
@@ -51,16 +64,9 @@ try:
                 os.mkdir(target_dir)
             with open(file_path, 'r') as fi:
                 txtr = fi.read()
-                txt = txtr
-                start = txt.index( "[[" ) + len( "[[" )
-                end = txt.index( "]]", start )
-                z = txt[start:end]
-                nza = z.split('_', 1)[1]
-                nzb = nza.split('_')
-                nz = ""
-                for i in nzb:
-                    nz = nz+i.capitalize()
-                txt = txt.replace("[["+z+"]]",nz)
+                txt = flip(txtr)
+                while txt.find("[[") > 0:
+                    txt = flip(txt)
             with open(file_path, 'w') as fo:
                 fo.write(txt)
             if file_path.find("initiate_controller_model.py") > 0:
