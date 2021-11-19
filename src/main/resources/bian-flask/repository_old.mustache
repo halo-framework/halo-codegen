@@ -21,16 +21,15 @@ from halo_app.infra.sql_uow import SqlAlchemyUnitOfWork
 #@todo fix the import for the aggregate
 from {{packageName}}.domain.model import [[{{operationId}}]]
 
-{{/operation}}
+class [[{{operationId}}]]Repository(SqlAlchemyRepository):
+    def get_type(self) ->type:
+        return [[{{operationId}}]]
 
-class Repository(SqlAlchemyRepository):
-    pass
-
-class Uow(SqlAlchemyUnitOfWork):
+class [[{{operationId}}]]Uow(SqlAlchemyUnitOfWork):
     def init_repository(self):
-        return Repository(self.session)
+        return [[{{operationId}}]]Repository(self.session)
 
-
+{{/operation}}
 
 {{/operations}}
 
