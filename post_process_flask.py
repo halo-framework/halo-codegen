@@ -63,10 +63,10 @@ try:
                 txt = txt.replace("[["+z+"]]",nz)
             with open(file_path, 'w') as fo:
                 fo.write(txt)
-            if file_path.find("_controller_model.py") > 0:
-                new_name = file_name.replace("_controller_model.py","_model.py")
+            if file_path.find("initiate_controller_model.py") > 0:
+                new_name = file_name.replace("initiate_controller_model.py","model.py")
             else:
-                new_name = file_name.replace("_controller_repository.py","_repository.py")
+                new_name = file_name.replace("initiate_controller_repository.py","repository.py")
             new_path = os.path.join(target_dir,new_name)
             try:
                 #os.rename(file_path, new_path)
