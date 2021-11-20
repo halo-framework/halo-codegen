@@ -1,5 +1,5 @@
 
-    #def set_query_data(self,halo_query_request: HaloQueryRequest)->Tuple[str,Dict]:
-    #    sql_query = SQL_DICT.get(halo_query_request.usecase_id)
-    #    params = {}
-    #    return sql_query,params
+    def set_query_data(self,halo_query_request: HaloQueryRequest)->Tuple[str,Dict]:
+        sql_query = SQL_DICT.get(halo_query_request.usecase_id)
+        params = {}
+        return sql_query,params
