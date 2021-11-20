@@ -9,9 +9,6 @@ import connexion
 from typing import Tuple, Dict
 from halo_app.app.request import HaloQueryRequest
 
-{{#imports}}
-{{import}}  # noqa: E501
-{{/imports}}
 from {{packageName}} import util
 {{#operations}}
 from halo_app.infra.sql_repository import SqlAlchemyRepository
