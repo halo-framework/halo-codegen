@@ -1,3 +1,7 @@
 {
-    "retrieve_current_account": "tester.test.test_base.CurrentAccountUow"
+    {{#operations}}
+    {{#operation}}
+    "{{operationId}}": "{{packageName}}.infra.repository.repository.Uow",
+    {{/operation}}
+    {{/operations}}
 }

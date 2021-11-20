@@ -18,13 +18,15 @@ from halo_app.infra.sql_repository import SqlAlchemyRepository
 from halo_app.infra.sql_uow import SqlAlchemyUnitOfWork
 
 {{#operation}}
-#@todo fix the import for the aggregate
-from {{packageName}}.domain.model import [[{{operationId}}]]
+from {{packageName}}.domain.model.model import [[{{operationId}}]]
 
 {{/operation}}
 
 class Repository(SqlAlchemyRepository):
-    pass
+    #@todo fix the name of the aggregate
+    def get_type(self) ->type:
+        return AGGREGATEROOT
+
 
 class Uow(SqlAlchemyUnitOfWork):
     def init_repository(self):
