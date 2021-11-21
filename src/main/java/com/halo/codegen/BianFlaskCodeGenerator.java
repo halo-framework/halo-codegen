@@ -98,6 +98,7 @@ public class BianFlaskCodeGenerator extends AbstractPythonConnexionServerCodegen
     this.apiTemplateFiles.put("domain_model.mustache", "_model.py");
     this.apiTemplateFiles.put("repository.mustache", "_repository.py");
     this.apiTemplateFiles.put("sql.mustache", "_sql.py");
+    this.modelTemplateFiles.put("model_x.mustache", "x_model.py");
   }
 
   protected void addSupportingFiles() {
