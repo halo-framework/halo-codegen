@@ -96,7 +96,7 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
     api_response = SysUtil.process_response_for_client(bian_response)
 
     if api_response.success:
-        payload = api_response.payload
+        payload = {{#returnType}}{{.}}{{/returnType}}{{^returnType}}None{{/returnType}}.from_dict(api_response.payload)
     else:
         payload = api_response.error
 
